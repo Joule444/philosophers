@@ -7,6 +7,7 @@ BUILDIR		=	build
 INCLDIR		=	includes/
 
 SRCS		=	main.c\
+				utils.c\
 
 OBJ			=	$(SRCS:%.c=$(BUILDIR)/%.o)
 
