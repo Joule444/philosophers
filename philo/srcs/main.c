@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/01/17 16:56:07 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/19 18:27:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,25 +55,45 @@ int check_args(int argc, char **argv)
     return (0);
 }
 
+void    *routine(void* data)
+{
+    t_data  *data1;
+
+    data1 = (t_data *)data;
+    while (1)
+    {
+        printf("Philo start eating\n");
+        sleep(data1->tte);
+        printf("Philo start sleeping\n");
+        sleep(data1->tts);
+        printf("Philo start thinking\n");
+        sleep(1);
+    }
+    return (NULL);
+}
+
 int main(int argc, char **argv)
 {
     t_data  data;
+    pthread_t   t1;
 
     if (check_args(argc, argv) == 1)
         return(printf("Args error\n"), 1);
     set_data(argc, argv, &data);
-    printf("nb_philo : %d\n", data.nb_philo);
-    printf("ttd : %d\n", (int)data.ttd);
-    printf("tte : %d\n", (int)data.tte);
-    printf("tts : %d\n", (int)data.tts);
-    printf("nb_meal : %d\n", data.nb_meal);
+    if (pthread_create(&t1, NULL, routine, &data) != 0)
+        return (2);
+    if (pthread_join(t1, NULL))
+        return (3);
     return (0);
 }
+
+// int mails = 0;
 
 // void  *routine()
 // {
 //     printf("Test from threads\n");
-//     sleep(3);
+//     for(int i = 0; i < 1000000; i++)
+//         mails++;
 //     printf("Ending thread\n");
 //     return (NULL);
 // }
@@ -84,9 +104,14 @@ int main(int argc, char **argv)
 //     (void) argv;
 //     pthread_t   t1;
 //     pthread_t   t2;
-//     pthread_create(&t1, NULL, &routine, NULL);
-//     pthread_create(&t2, NULL, &routine, NULL);
-//     pthread_join(t1, NULL);
-//     pthread_join(t2, NULL);
+//     if (pthread_create(&t1, NULL, &routine, NULL) != 0)
+//         return (1);
+//     if (pthread_create(&t2, NULL, &routine, NULL) != 0)
+//         return (1);
+//     if (pthread_join(t1, NULL) != 0)
+//         return (1);
+//     if (pthread_join(t2, NULL) != 0)
+//         return (1);
+//     printf("mails : %d\n", mails);
 //     return 0;
 // }
