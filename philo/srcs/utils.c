@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/01/17 12:02:01 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/20 17:31:04 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,14 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (sign * res);
+}
+
+size_t	ft_strlen(const char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

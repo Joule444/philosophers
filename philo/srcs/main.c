@@ -6,85 +6,72 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/01/19 18:27:33 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/20 17:59:44 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void    set_data(int argc, char **argv, t_data *data)
+void print_error(char *str)
 {
-    data->nb_philo = ft_atoi(argv[1]);
-    data->ttd = ft_atoi(argv[2]);
-    data->tte = ft_atoi(argv[3]); 
-    data->tts = ft_atoi(argv[4]);
-    if (argc == 6)
-        data->nb_meal = ft_atoi(argv[5]);
-    else
-        data->nb_meal = -1;
+	write(2, str, ft_strlen(str));
 }
 
-int is_num(char *str)
+void    init_data(int argc, char **argv, t_data *data)
 {
-    int i;
-
-    i = 0;
-    while (str[i])
-    {
-        if (!(str[i] >= '0' && str[i] <= '9'))
-            return (0);
-        i++;
-    }
-    return (1);
+	data->nb_philo = ft_atoi(argv[1]);
+	data->ttd = ft_atoi(argv[2]);
+	data->tte = ft_atoi(argv[3]); 
+	data->tts = ft_atoi(argv[4]);
+	if (argc == 6)
+		data->nb_meal = ft_atoi(argv[5]);
+	else
+		data->nb_meal = -1;
 }
 
-int check_args(int argc, char **argv)
+// void    philo(t_data data)
+// {
+//     t_philo *philo;
+//     int i;
+//
+//     i = 0;
+//     while (i <= data.nb_philo)
+//     {
+//         pthread_create();
+//         i++;
+//     }
+// }
+
+int	init_philo(t_philo **philo, t_data data)
 {
-    int i;
-
-    i = 1;
-    (void) argv;
-    if (argc != 5 && argc != 6)
-        return (1);
-    while (argv[i])
-    {
-        if (is_num(argv[i]) == 0)
-            return (1);
-        i++;
-    }
-    return (0);
-}
-
-void    *routine(void* data)
-{
-    t_data  *data1;
-
-    data1 = (t_data *)data;
-    while (1)
-    {
-        printf("Philo start eating\n");
-        sleep(data1->tte);
-        printf("Philo start sleeping\n");
-        sleep(data1->tts);
-        printf("Philo start thinking\n");
-        sleep(1);
-    }
-    return (NULL);
+	int	i;
+	
+	i = 0;
+	*philo = malloc(sizeof(t_philo) * data.nb_philo);
+	if (*philo == NULL)
+		return (print_error("Malloc error\n"), 1);
+	while (i < data.nb_philo)
+	{
+		philo[i]->index = i + 1;
+		philo[i]->data = data;
+		philo[i]->meals = 0;
+		i++;
+	}
+	return (0);
 }
 
 int main(int argc, char **argv)
 {
-    t_data  data;
-    pthread_t   t1;
+	t_data  data;
+	t_philo *philo;
 
-    if (check_args(argc, argv) == 1)
-        return(printf("Args error\n"), 1);
-    set_data(argc, argv, &data);
-    if (pthread_create(&t1, NULL, routine, &data) != 0)
-        return (2);
-    if (pthread_join(t1, NULL))
-        return (3);
-    return (0);
+	if (check_args(argc, argv) == 1)
+		return (1);
+	init_data(argc, argv, &data);
+	if (init_philo(&philo, data) == 1)
+		return (2);
+	// philo(data);
+	return (0);
 }
 
 // int mails = 0;
