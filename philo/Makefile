@@ -9,6 +9,7 @@ INCLDIR		=	includes/
 SRCS		=	main.c\
 				utils.c\
 				check_args.c\
+				init.c\
 
 OBJ			=	$(SRCS:%.c=$(BUILDIR)/%.o)
 

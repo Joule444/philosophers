@@ -6,55 +6,44 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/01/20 17:59:44 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/23 19:20:37 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "philo.h"
 
 void print_error(char *str)
 {
 	write(2, str, ft_strlen(str));
 }
 
-void    init_data(int argc, char **argv, t_data *data)
+void	*routine(void *param)
 {
-	data->nb_philo = ft_atoi(argv[1]);
-	data->ttd = ft_atoi(argv[2]);
-	data->tte = ft_atoi(argv[3]); 
-	data->tts = ft_atoi(argv[4]);
-	if (argc == 6)
-		data->nb_meal = ft_atoi(argv[5]);
-	else
-		data->nb_meal = -1;
+	t_philo *philo;
+
+	philo = param;
+	sleep(1);
+	printf("Hello from thread %d\n", philo->index);
+	return (NULL);
 }
 
-// void    philo(t_data data)
-// {
-//     t_philo *philo;
-//     int i;
-//
-//     i = 0;
-//     while (i <= data.nb_philo)
-//     {
-//         pthread_create();
-//         i++;
-//     }
-// }
-
-int	init_philo(t_philo **philo, t_data data)
+int	philosophers(t_philo *philo)
 {
-	int	i;
-	
+	int i;
+
 	i = 0;
-	*philo = malloc(sizeof(t_philo) * data.nb_philo);
-	if (*philo == NULL)
-		return (print_error("Malloc error\n"), 1);
-	while (i < data.nb_philo)
+	while (i < philo->data.nb_philo)
 	{
-		philo[i]->index = i + 1;
-		philo[i]->data = data;
-		philo[i]->meals = 0;
+		if (pthread_create(&(philo[i].thread), NULL, &routine, philo + i) != 0)
+			return (print_error("Thread create error\n"), 1);
+		printf("Thread %d created!\n", philo[i].index);
+		i++;
+    }
+	i = 0;
+	while (i < philo->data.nb_philo)
+	{
+		if (pthread_join(philo[i].thread, NULL) != 0)
+			return (print_error("Thread join error\n"), 1);
 		i++;
 	}
 	return (0);
@@ -70,7 +59,8 @@ int main(int argc, char **argv)
 	init_data(argc, argv, &data);
 	if (init_philo(&philo, data) == 1)
 		return (2);
-	// philo(data);
+	if (philosophers(philo))
+		return (3);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/01/20 18:00:02 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/23 17:06:22 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,19 @@ typedef struct  s_philo
 	t_data  data;
 }   t_philo;
 
-void print_error(char *str);
 
 //Check Args
-int check_args(int argc, char **argv);
+int 	check_args(int argc, char **argv);
+
+//Init
+void    init_data(int argc, char **argv, t_data *data);
+int		init_philo(t_philo **philo, t_data data);
 
 //Utils
-int	ft_atoi(const char *str);
+int		ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
+void 	print_error(char *str);
+
 
 
 #endif
