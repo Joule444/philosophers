@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/01/23 17:06:22 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:32:45 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,25 +32,28 @@ typedef struct s_data
 
 typedef struct  s_philo
 {
-	int	index;
-	int meals;
-	pthread_t   thread;
-	t_data  data;
+	int							id;
+	int 						meals;
+	time_t					last_meal;
+	pthread_t				thread;
+	pthread_mutex_t	left_hand;
+	pthread_mutex_t	right_hand;
+	t_data					data;
 }   t_philo;
 
 
 //Check Args
-int 	check_args(int argc, char **argv);
+int 		check_args(int argc, char **argv);
 
 //Init
 void    init_data(int argc, char **argv, t_data *data);
-int		init_philo(t_philo **philo, t_data data);
+int			init_philo(t_philo **philo, t_data data);
 
 //Utils
-int		ft_atoi(const char *str);
+int			ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
-void 	print_error(char *str);
+void 		print_error(char *str);
 
-
+int	destroy_philo(t_philo **philo);
 
 #endif

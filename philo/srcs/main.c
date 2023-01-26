@@ -6,16 +6,11 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/01/23 19:20:37 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/26 16:38:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-void print_error(char *str)
-{
-	write(2, str, ft_strlen(str));
-}
 
 void	*routine(void *param)
 {
@@ -23,7 +18,10 @@ void	*routine(void *param)
 
 	philo = param;
 	sleep(1);
-	printf("Hello from thread %d\n", philo->index);
+	printf("Hello from thread %d\n", philo->id);
+	sleep(1);
+	// if (philo->id % 2 != 0) //Si impair
+		
 	return (NULL);
 }
 
@@ -36,7 +34,7 @@ int	philosophers(t_philo *philo)
 	{
 		if (pthread_create(&(philo[i].thread), NULL, &routine, philo + i) != 0)
 			return (print_error("Thread create error\n"), 1);
-		printf("Thread %d created!\n", philo[i].index);
+		printf("Thread %d created!\n", philo[i].id);
 		i++;
     }
 	i = 0;
@@ -61,7 +59,9 @@ int main(int argc, char **argv)
 		return (2);
 	if (philosophers(philo))
 		return (3);
-	return (0);
+	if (destroy_philo(&philo))
+		return (4);
+	return (free(philo), 0);
 }
 
 // int mails = 0;
