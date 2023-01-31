@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/01/26 16:38:33 by jules            ###   ########.fr       */
+/*   Updated: 2023/01/31 13:33:42 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,25 @@ void	*routine(void *param)
 	sleep(1);
 	printf("Hello from thread %d\n", philo->id);
 	sleep(1);
-	// if (philo->id % 2 != 0) //Si impair
+	
+	if (philo->id % 2 != 0) //Premiere routine de demmarage si impair
+	{
+		//Prends fork left et right
+		printf("[time] %d is eating\n", philo->id);
+		usleep(philo->data.tte);
+		//Lache fork left et right
 		
+		printf("[time] %d is sleeping\n", philo->id);
+		usleep(philo->data.tts);
+		
+		printf("[time] %d is thinking\n", philo->id);
+	}
+	
+	//Routine classique
+	// while (all alive)
+	// {
+		
+	// }
 	return (NULL);
 }
 
@@ -59,36 +76,7 @@ int main(int argc, char **argv)
 		return (2);
 	if (philosophers(philo))
 		return (3);
-	if (destroy_philo(&philo))
-		return (4);
+	// if (destroy_philo(&philo))
+	// 	return (4);
 	return (free(philo), 0);
 }
-
-// int mails = 0;
-
-// void  *routine()
-// {
-//     printf("Test from threads\n");
-//     for(int i = 0; i < 1000000; i++)
-//         mails++;
-//     printf("Ending thread\n");
-//     return (NULL);
-// }
-
-// int main(int argc, char **argv)
-// {
-//     (void) argc;
-//     (void) argv;
-//     pthread_t   t1;
-//     pthread_t   t2;
-//     if (pthread_create(&t1, NULL, &routine, NULL) != 0)
-//         return (1);
-//     if (pthread_create(&t2, NULL, &routine, NULL) != 0)
-//         return (1);
-//     if (pthread_join(t1, NULL) != 0)
-//         return (1);
-//     if (pthread_join(t2, NULL) != 0)
-//         return (1);
-//     printf("mails : %d\n", mails);
-//     return 0;
-// }
