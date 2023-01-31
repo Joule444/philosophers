@@ -10,6 +10,7 @@ SRCS		=	main.c\
 				utils.c\
 				check_args.c\
 				init.c\
+				events.c\
 
 OBJ			=	$(SRCS:%.c=$(BUILDIR)/%.o)
 
