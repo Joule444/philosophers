@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/01/23 19:58:16 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/03 18:42:27 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void print_error(char *str)
+int print_error(char *str)
 {
 	write(2, str, ft_strlen(str));
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 14:58:01 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/03 18:42:15 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	init_data(int argc, char **argv, t_data *data)
 {
 	int							i;
-	struct timeval	current_time;
 	
 	data->nb_philo = ft_atoi(argv[1]);
 	data->ttd = ft_atoi(argv[2]);
@@ -27,9 +26,8 @@ int	init_data(int argc, char **argv, t_data *data)
 		data->nb_meal = -1;
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->fork)
-		return (print_error("Malloc error\n"), 1);
-	gettimeofday(&current_time, NULL);
-	data->start_time = (current_time.tv_sec * 1000) + current_time.tv_usec;
+		return (print_error("Malloc error\n"));
+	data->start_time = get_current_time(data);
 	i = 0;
 	while (i < data->nb_philo)
 	{
@@ -40,22 +38,6 @@ int	init_data(int argc, char **argv, t_data *data)
 	return (0);
 }
 
-int	destroy_philo(t_philo **philo)
-{
-	int	i;
-
-	i = 0;
-	while (i < (*philo)[i].data.nb_philo)
-	{
-		// pthread_mutex_destroy(&(*philo)[i].left_hand);
-		// pthread_mutex_destroy(&(*philo)[i].right_hand);
-		// // if (pthread_join((*philo)[i].thread, NULL) != 0)
-		// // 	return (print_error("Thread join error\n"), 1);
-		i++;
-	}
-	return (0);
-}
-
 int	init_philo(t_philo **philo, t_data *data)
 {
 	int	i;
@@ -63,7 +45,7 @@ int	init_philo(t_philo **philo, t_data *data)
 	i = 0;
 	*philo = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!(*philo))
-		return (print_error("Malloc error\n"), 1);
+		return (print_error("Malloc error\n"));
 	while (i < data->nb_philo)
 	{
 		(*philo)[i].id = i + 1;
