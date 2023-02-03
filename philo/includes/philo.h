@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/01/31 16:42:40 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:57:14 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,25 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+enum	e_state
+{
+	EATING,
+	SLEEPING,
+	THINKING,
+	HAS_TAKEN_A_FORK,
+	DIED
+};
+
 typedef struct s_data
 {
+	time_t					start_time;
 	time_t  				ttd;
 	time_t  				tte;
 	time_t  				tts;
 	int     				nb_philo;
 	int     				nb_meal;
 	pthread_mutex_t	*fork;
+	pthread_mutex_t	state_log;
 }   t_data;
 
 typedef struct  s_philo
@@ -49,6 +60,7 @@ int 		check_args(int argc, char **argv);
 int			init_data(int argc, char **argv, t_data *data);
 int			init_philo(t_philo **philo, t_data *data);
 
+void	print_state(t_philo philo, int state);
 
 //Events
 void		eat(t_philo *philo);

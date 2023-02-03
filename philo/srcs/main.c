@@ -6,59 +6,89 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/01/31 18:06:53 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/03 14:59:16 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	*routine(void *param)
-// {
-// 	t_philo *philo;
+time_t	get_timestamp(t_data data)
+{
+	struct timeval	current_time;
+	time_t					time;
 
-// 	philo = param;
-// 	sleep(1);
-// 	printf("Hello from thread %d\n", philo->id);
-// 	sleep(1);
-	
-// 	if (philo->id % 2 != 0) //Premiere routine de demmarage si impair
-// 	{
-// 		eat(philo);
-// 		printf("Philo %d meals count : %d\n", philo->id, philo->meals);
-// 		printf("[time] %d is sleeping\n", philo->id);
-// 		usleep(philo->data.tts);
-// 		printf("[time] %d is thinking\n", philo->id);
-// 	}
-// 	else
-// 	{
-// 		printf("[time] %d is thinking\n", philo->id);
-// 		usleep(philo->data.tte);
-// 	}
-// 	while (1)
-// 	{
-// 		eat(philo);
-// 		printf("Philo %d meals count : %d\n", philo->id, philo->meals);
-// 		printf("[time] %d is sleeping\n", philo->id);
-// 		usleep(philo->data.tts);
-// 		printf("[time] %d is thinking\n", philo->id);
-// 	}
-// 	return (NULL);
-// }
+	gettimeofday(&current_time, NULL);
+	time = (current_time.tv_sec * 1000) + current_time.tv_usec;
+	return (time - data.start_time);
+}
+
+void	print_state(t_philo philo, int state)
+{
+	pthread_mutex_lock(&philo.data.state_log);
+	if (state == EATING)
+	{
+		printf("[%ld] %d is eating\n", (long) get_timestamp(philo.data), philo.id);
+	}
+	if (state == SLEEPING)
+	{
+		printf("[%ld] %d is sleeping\n", (long) get_timestamp(philo.data), philo.id);
+	}
+	if (state == THINKING)
+	{
+		printf("[%ld] %d is thinking\n", (long) get_timestamp(philo.data), philo.id);
+	}
+	if (state == HAS_TAKEN_A_FORK)
+	{
+		printf("[%ld] %d has taken a fork\n", (long) get_timestamp(philo.data), philo.id);
+	}
+	pthread_mutex_unlock(&philo.data.state_log);
+}
 
 void	*routine(void *param)
 {
 	t_philo *philo;
-	
+
 	philo = param;
-	sleep(5);
-	pthread_mutex_lock(&philo->left_hand);
-	pthread_mutex_lock(&philo->right_hand);
-	printf("%d take his forks\n", philo->id);
-	sleep(5);
-	pthread_mutex_unlock(&philo->right_hand);
-	pthread_mutex_unlock(&philo->left_hand);
+	sleep(1);
+	
+	printf("Start time = %ld\n", (long)philo->data.start_time);
+	if (philo->id % 2 != 0) //Premiere routine de demmarage si impair
+	{
+		eat(philo);
+		print_state(*philo, SLEEPING);
+		usleep(philo->data.tts);
+		print_state(*philo, THINKING);
+	}
+	else
+	{
+		print_state(*philo, THINKING);
+		usleep(philo->data.tte);
+	}
+	while (1)
+	{
+		eat(philo);
+		printf("Philo %d meals count : %d\n", philo->id, philo->meals);
+		print_state(*philo, SLEEPING);
+		usleep(philo->data.tts);
+		print_state(*philo, THINKING);
+	}
 	return (NULL);
 }
+
+// void	*routine(void *param)
+// {
+// 	t_philo *philo;
+	
+// 	philo = param;
+// 	sleep(5);
+// 	pthread_mutex_lock(&philo->left_hand);
+// 	pthread_mutex_lock(&philo->right_hand);
+// 	printf("%d take his forks\n", philo->id);
+// 	sleep(5);
+// 	pthread_mutex_unlock(&philo->right_hand);
+// 	pthread_mutex_unlock(&philo->left_hand);
+// 	return (NULL);
+// }
 
 int	philosophers(t_philo *philo)
 {
