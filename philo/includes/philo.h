@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 14:57:14 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/03 16:54:15 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int			init_philo(t_philo **philo, t_data *data);
 void	print_state(t_philo philo, int state);
 
 //Events
-void		eat(t_philo *philo);
+void		eating(t_philo *philo);
+void		sleeping(t_philo *philo);
 
 //Utils
 int			ft_atoi(const char *str);

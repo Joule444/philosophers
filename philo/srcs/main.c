@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 14:59:16 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/03 17:02:46 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,46 +49,22 @@ void	*routine(void *param)
 	t_philo *philo;
 
 	philo = param;
-	sleep(1);
-	
-	printf("Start time = %ld\n", (long)philo->data.start_time);
 	if (philo->id % 2 != 0) //Premiere routine de demmarage si impair
 	{
-		eat(philo);
-		print_state(*philo, SLEEPING);
-		usleep(philo->data.tts);
+		eating(philo);
+		sleeping(philo);
 		print_state(*philo, THINKING);
 	}
 	else
-	{
-		print_state(*philo, THINKING);
-		usleep(philo->data.tte);
-	}
+		usleep(300);
 	while (1)
 	{
-		eat(philo);
-		printf("Philo %d meals count : %d\n", philo->id, philo->meals);
-		print_state(*philo, SLEEPING);
-		usleep(philo->data.tts);
+		eating(philo);
+		sleeping(philo);
 		print_state(*philo, THINKING);
 	}
 	return (NULL);
 }
-
-// void	*routine(void *param)
-// {
-// 	t_philo *philo;
-	
-// 	philo = param;
-// 	sleep(5);
-// 	pthread_mutex_lock(&philo->left_hand);
-// 	pthread_mutex_lock(&philo->right_hand);
-// 	printf("%d take his forks\n", philo->id);
-// 	sleep(5);
-// 	pthread_mutex_unlock(&philo->right_hand);
-// 	pthread_mutex_unlock(&philo->left_hand);
-// 	return (NULL);
-// }
 
 int	philosophers(t_philo *philo)
 {
@@ -99,7 +75,6 @@ int	philosophers(t_philo *philo)
 	{
 		if (pthread_create(&(philo[i].thread), NULL, &routine, philo + i) != 0)
 			return (print_error("Thread create error\n"), 1);
-		printf("Thread %d created!\n", philo[i].id);
 		i++;
     }
 	i = 0;
