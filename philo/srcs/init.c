@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 18:42:15 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 13:02:51 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	init_data(int argc, char **argv, t_data *data)
 		pthread_mutex_init(&(data->fork[i]), NULL);
 		i++;
 	}
-	pthread_mutex_init(&(data->state_log), NULL);
+	pthread_mutex_init(&(data->log), NULL);
 	return (0);
 }
 
@@ -51,11 +51,15 @@ int	init_philo(t_philo **philo, t_data *data)
 		(*philo)[i].id = i + 1;
 		(*philo)[i].data = *data;
 		(*philo)[i].meals = 0;
-		(*philo)[i].left_hand = data->fork[i];
+		(*philo)[i].left_hand = &data->fork[i];
 		if ((*philo)[i].id != 1)
-			(*philo)[i].right_hand = data->fork[i - 1];
+		{
+			(*philo)[i].right_hand = &data->fork[i - 1];
+		}
 		else
-			(*philo)[i].right_hand = data->fork[data->nb_philo - 1];
+		{
+			(*philo)[i].right_hand = &data->fork[data->nb_philo - 1];
+		}
 		i++;
 	}
 	return (0);

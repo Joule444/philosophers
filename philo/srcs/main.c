@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 18:48:27 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 14:24:49 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	*routine(void *param)
 	while (1)
 	{
 		eating(philo);
-		printf("%d meal number %d was at %ld\n", philo->id, philo->meals, philo->last_meal);
 		sleeping(philo);
 		print_state(*philo, THINKING);
 	}

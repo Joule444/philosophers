@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 18:42:01 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 12:59:48 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_data
 	int     				nb_philo;
 	int     				nb_meal;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	state_log;
+	pthread_mutex_t	log;
 	struct timeval	current_time;
 }   t_data;
 
@@ -49,8 +49,8 @@ typedef struct  s_philo
 	int 						meals;
 	time_t					last_meal;
 	pthread_t				thread;
-	pthread_mutex_t	left_hand;
-	pthread_mutex_t	right_hand;
+	pthread_mutex_t	*left_hand;
+	pthread_mutex_t	*right_hand;
 	t_data					data;
 }   t_philo;
 

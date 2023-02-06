@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 18:39:41 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 14:36:32 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,17 @@ time_t	get_timestamp(t_data data)
 
 void	print_state(t_philo philo, int state)
 {
-	pthread_mutex_lock(&philo.data.state_log);
+	long	time;
+	
+	time = get_timestamp(philo.data);
+	pthread_mutex_lock(&philo.data.log);
 	if (state == EATING)
-		printf("[%ld] %d is eating\n", (long) get_timestamp(philo.data), philo.id);
+		printf("[%ld] %d is eating\n", time, philo.id);
 	if (state == SLEEPING)
-		printf("[%ld] %d is sleeping\n", (long) get_timestamp(philo.data), philo.id);
+		printf("[%ld] %d is sleeping\n", time, philo.id);
 	if (state == THINKING)
-		printf("[%ld] %d is thinking\n", (long) get_timestamp(philo.data), philo.id);
+		printf("[%ld] %d is thinking\n", time, philo.id);
 	if (state == HAS_TAKEN_A_FORK)
-		printf("[%ld] %d has taken a fork\n", (long) get_timestamp(philo.data), philo.id);
-	pthread_mutex_unlock(&philo.data.state_log);
+		printf("[%ld] %d has taken a fork\n", time, philo.id);
+	pthread_mutex_unlock(&philo.data.log);
 }
