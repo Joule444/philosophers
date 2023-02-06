@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 12:59:48 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:31:33 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_data
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	log;
 	struct timeval	current_time;
+	int							dead;
 }   t_data;
 
 typedef struct  s_philo

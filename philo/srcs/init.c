@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 13:02:51 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 17:47:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	init_data(int argc, char **argv, t_data *data)
 	data->ttd = ft_atoi(argv[2]);
 	data->tte = ft_atoi(argv[3]); 
 	data->tts = ft_atoi(argv[4]);
+	data->dead = 0;
 	if (argc == 6)
 		data->nb_meal = ft_atoi(argv[5]);
 	else
@@ -51,6 +52,7 @@ int	init_philo(t_philo **philo, t_data *data)
 		(*philo)[i].id = i + 1;
 		(*philo)[i].data = *data;
 		(*philo)[i].meals = 0;
+		(*philo)[i].last_meal = get_current_time(data);
 		(*philo)[i].left_hand = &data->fork[i];
 		if ((*philo)[i].id != 1)
 		{
