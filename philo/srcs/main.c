@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 14:24:49 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 14:39:47 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int main(int argc, char **argv)
 	t_data  data;
 	t_philo *philo;
 
+	// printf ("\033[34;01mBonjour\033[00m\n");
 	if (check_args(argc, argv) == 1)
 		return (1);
 	if (init_data(argc, argv, &data))

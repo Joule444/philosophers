@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 13:02:05 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/06 14:46:56 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	eating(t_philo *philo)
 
 void	sleeping(t_philo *philo)
 {
+	print_state(*philo, SLEEPING);
 	pthread_mutex_unlock(philo->left_hand);
 	pthread_mutex_unlock(philo->right_hand);
-	print_state(*philo, SLEEPING);
 	usleep(philo->data.tts * 1000);
 }
