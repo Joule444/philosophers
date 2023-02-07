@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   state_logs.c                                       :+:      :+:    :+:   */
+/*   logs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 18:18:43 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:37:37 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,13 @@ void	print_state(t_philo philo, int state)
 	long	ts;
 	long	time;
 	
-	ts = get_timestamp(philo.data);
-	time = get_current_time(&philo.data);
-	pthread_mutex_lock(&philo.data.log);
-	if (time - philo.last_meal > philo.data.ttd)
+	ts = get_timestamp(*philo.data);
+	time = get_current_time(philo.data);
+	pthread_mutex_lock(&philo.data->micro);
+	if (time - philo.last_meal > philo.data->ttd)
 	{
 		printf("[%ld] \033[30;01m%d died\033[00m\n", ts, philo.id);
+		return ;
 	}
 	if (state == EATING)
 		printf("[%ld] \033[31;01m%d is eating\033[00m\n", ts, philo.id);
@@ -49,5 +50,5 @@ void	print_state(t_philo philo, int state)
 		printf("[%ld] \033[32;01m%d is thinking\033[00m\n", ts, philo.id);
 	if (state == HAS_TAKEN_A_FORK)
 		printf("[%ld] \033[33;01m%d has taken a fork\033[00m\n", ts, philo.id);
-	pthread_mutex_unlock(&philo.data.log);
+	pthread_mutex_unlock(&philo.data->micro);
 }

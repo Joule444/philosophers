@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 18:17:44 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:33:53 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,21 @@ void	*routine(void *param)
 	return (NULL);
 }
 
-int	threads_exec(t_philo *philo)
+int	philosophers(t_philo *philo)
 {
 	int i;
 
 	i = 0;
-	while (i < philo->data.nb_philo)
+	if (pthread_create(&(philo->data->observer->thread), NULL, &observer, philo) != 0)
+			return (print_error("Thread create error\n"));
+	while (i < philo->data->nb_philo)
 	{
 		if (pthread_create(&(philo[i].thread), NULL, &routine, philo + i) != 0)
 			return (print_error("Thread create error\n"));
 		i++;
     }
 	i = 0;
-	while (i < philo->data.nb_philo)
+	while (i < philo->data->nb_philo)
 	{
 		if (pthread_join(philo[i].thread, NULL) != 0)
 			return (print_error("Thread join error\n"));
@@ -61,7 +63,7 @@ int main(int argc, char **argv)
 		return (2);
 	if (init_philo(&philo, &data) == 1)
 		return (3);
-	if (threads_exec(philo))
+	if (philosophers(philo))
 		return (4);
 	free(data.fork);
 	free(philo);

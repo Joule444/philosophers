@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 17:31:33 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:33:21 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ enum	e_state
 	DIED
 };
 
+typedef struct s_observer
+{
+	pthread_t	thread;
+	int				end;
+}	t_observer;
+
+
 typedef struct s_data
 {
 	time_t					start_time;
@@ -37,12 +44,12 @@ typedef struct s_data
 	time_t  				tte;
 	time_t  				tts;
 	int     				nb_philo;
-	int     				nb_meal;
+	int     				max_meals;
 	pthread_mutex_t	*fork;
-	pthread_mutex_t	log;
+	pthread_mutex_t	micro;
 	struct timeval	current_time;
-	int							dead;
-}   t_data;
+	t_observer	*observer;
+}	t_data;
 
 typedef struct  s_philo
 {
@@ -52,8 +59,8 @@ typedef struct  s_philo
 	pthread_t				thread;
 	pthread_mutex_t	*left_hand;
 	pthread_mutex_t	*right_hand;
-	t_data					data;
-}   t_philo;
+	t_data					*data;
+}	t_philo;
 
 //Check Args
 int 		check_args(int argc, char **argv);
@@ -69,11 +76,12 @@ time_t	get_current_time(t_data *data);
 void		eating(t_philo *philo);
 void		sleeping(t_philo *philo);
 
+//Observer
+void	*observer(void *param);
+
 //Utils
 int			ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
 int			print_error(char *str);
-
-int	destroy_philo(t_philo **philo);
 
 #endif

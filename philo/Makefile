@@ -11,7 +11,8 @@ SRCS		=	main.c\
 				check_args.c\
 				init.c\
 				events.c\
-				state_logs.c\
+				logs.c\
+				observer.c\
 
 OBJ			=	$(SRCS:%.c=$(BUILDIR)/%.o)
 

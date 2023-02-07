@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/06 17:47:29 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/07 14:34:13 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int	init_data(int argc, char **argv, t_data *data)
 	data->ttd = ft_atoi(argv[2]);
 	data->tte = ft_atoi(argv[3]); 
 	data->tts = ft_atoi(argv[4]);
-	data->dead = 0;
+	data->observer->end = 0;
 	if (argc == 6)
-		data->nb_meal = ft_atoi(argv[5]);
+		data->max_meals = ft_atoi(argv[5]);
 	else
-		data->nb_meal = -1;
+		data->max_meals = -1;
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->fork)
 		return (print_error("Malloc error\n"));
@@ -35,7 +35,7 @@ int	init_data(int argc, char **argv, t_data *data)
 		pthread_mutex_init(&(data->fork[i]), NULL);
 		i++;
 	}
-	pthread_mutex_init(&(data->log), NULL);
+	pthread_mutex_init(&(data->micro), NULL);
 	return (0);
 }
 
@@ -50,7 +50,7 @@ int	init_philo(t_philo **philo, t_data *data)
 	while (i < data->nb_philo)
 	{
 		(*philo)[i].id = i + 1;
-		(*philo)[i].data = *data;
+		(*philo)[i].data = data;
 		(*philo)[i].meals = 0;
 		(*philo)[i].last_meal = get_current_time(data);
 		(*philo)[i].left_hand = &data->fork[i];
