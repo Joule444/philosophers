@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/07 14:33:53 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/07 18:26:15 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*routine(void *param)
 	philo = param;
 	if (philo->id % 2 == 0) //Retarde les pairs pour faire commencer impairs
 		usleep(300);
-	while (1)
+	while (philo->data->observer->end == 0)
 	{
 		eating(philo);
 		sleeping(philo);
@@ -48,6 +48,8 @@ int	philosophers(t_philo *philo)
 			return (print_error("Thread join error\n"));
 		i++;
 	}
+	if (pthread_join(philo->data->observer->thread, NULL))
+		return (print_error("Thread join error\n"));
 	return (0);
 }
 

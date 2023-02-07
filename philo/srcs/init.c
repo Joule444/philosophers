@@ -6,21 +6,28 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/07 14:34:13 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/07 16:44:37 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	init_observer(t_data *data)
+{
+	t_observer	observer;
+	
+	observer.end = 0;
+	data->observer = &observer;
+}
+
 int	init_data(int argc, char **argv, t_data *data)
 {
-	int							i;
+	int	i;
 	
 	data->nb_philo = ft_atoi(argv[1]);
 	data->ttd = ft_atoi(argv[2]);
 	data->tte = ft_atoi(argv[3]); 
 	data->tts = ft_atoi(argv[4]);
-	data->observer->end = 0;
 	if (argc == 6)
 		data->max_meals = ft_atoi(argv[5]);
 	else
@@ -36,6 +43,7 @@ int	init_data(int argc, char **argv, t_data *data)
 		i++;
 	}
 	pthread_mutex_init(&(data->micro), NULL);
+	init_observer(data);
 	return (0);
 }
 
