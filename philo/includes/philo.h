@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/07 16:42:29 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:07:30 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int			init_philo(t_philo **philo, t_data *data);
 
 void	print_state(t_philo philo, int state);
 time_t	get_current_time(t_data *data);
+void	my_usleep(long time, t_philo philo);
 
 //Events
 void		eating(t_philo *philo);

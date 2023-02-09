@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/02/03 18:42:27 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/09 17:06:35 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	my_usleep(long time, t_philo philo)
+{
+	if (philo.data->observer->end == 1)
+		return ;
+	usleep(time);
 }
 
 int print_error(char *str)

@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/02/09 13:08:28 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/09 16:04:43 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ void	print_state(t_philo philo, int state)
 	long	ts;
 	
 	pthread_mutex_lock(&philo.data->micro);
+	if (philo.data->observer->end == 1)
+	{
+		pthread_mutex_unlock(&philo.data->micro);
+		return ;
+	}
 	ts = get_timestamp(*philo.data);
 	if (state == EATING)
 		printf("[%ld] \033[31;01m%d is eating\033[00m\n", ts, philo.id);
