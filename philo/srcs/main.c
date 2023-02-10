@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/09 17:08:13 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/10 16:57:36 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	*routine(void *param)
 	t_philo *philo;
 
 	philo = param;
+	printf("[%ld] Thread %d created\n", get_timestamp(*philo->data), philo->id);
 	if (philo->id % 2 == 0) //Retarde les pairs pour faire commencer impairs
 		my_usleep(300, *philo);
 	while (philo->data->observer->end == 0)
@@ -65,6 +66,7 @@ int main(int argc, char **argv)
 		return (2);
 	if (init_philo(&philo, &data) == 1)
 		return (3);
+	printf("maxmeal=%d\n", data.max_meals);
 	if (philosophers(philo))
 		return (4);
 	free(philo);

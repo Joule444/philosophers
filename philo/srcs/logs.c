@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/02/09 16:04:43 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/10 12:58:29 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,17 @@ void	print_state(t_philo philo, int state)
 	}
 	ts = get_timestamp(*philo.data);
 	if (state == EATING)
+	{
 		printf("[%ld] \033[31;01m%d is eating\033[00m\n", ts, philo.id);
+		pthread_mutex_unlock(&philo.data->micro);
+		my_usleep(philo.data->tte * 1000, philo);
+	}
 	if (state == SLEEPING)
+	{
 		printf("[%ld] \033[34;01m%d is sleeping\033[00m\n", ts, philo.id);
+		pthread_mutex_unlock(&philo.data->micro);
+		my_usleep(philo.data->tts * 1000, philo);
+	}
 	if (state == THINKING)
 		printf("[%ld] \033[32;01m%d is thinking\033[00m\n", ts, philo.id);
 	if (state == HAS_TAKEN_A_FORK)
