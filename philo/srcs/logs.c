@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 14:39:09 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:42:48 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_state(t_philo philo, int state)
 	long	ts;
 	
 	pthread_mutex_lock(&philo.data->micro);
-	if (philo.data->observer.end == 1)
+	if (check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(&philo.data->micro);
 		return ;

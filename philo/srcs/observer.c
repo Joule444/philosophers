@@ -6,11 +6,23 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 13:20:47 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:48:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	check_end(t_philo philo)
+{
+	pthread_mutex_lock(&philo.data->observer.look_end);
+	if (philo.data->observer.end == 1)
+	{
+		pthread_mutex_unlock(&philo.data->observer.look_end);
+		return (1);
+	}
+	pthread_mutex_lock(&philo.data->observer.look_end);
+	return (0);
+}
 
 int	is_dead(t_philo philo)
 {
@@ -54,7 +66,9 @@ void	*observer(void *param)
 		{
 			pthread_mutex_lock(&philo->data->micro);
 			printf("[%ld] Every philos had at least %d meals\n", get_timestamp(*philo->data), philo->data->max_meals);
+			pthread_mutex_lock(&philo->data->observer.look_end);
 			philo->data->observer.end = 1;
+			pthread_mutex_unlock(&philo->data->observer.look_end);
 			while (i < philo->data->nb_philo)
 			{
 				printf("%d mealcount = %d\n", philo[i].id, philo[i].meals);

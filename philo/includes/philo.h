@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 13:18:46 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:51:54 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ enum	e_state
 
 typedef struct s_observer
 {
-	pthread_t	thread;
-	int			end;
+	pthread_t		thread;
+	int				end;
+	pthread_mutex_t	look_end;
 }	t_observer;
 
 
@@ -80,6 +81,8 @@ void	sleeping(t_philo *philo);
 
 //Observer
 void	*observer(void *param);
+
+int	check_end(t_philo philo);
 
 //Utils
 int		ft_atoi(const char *str);

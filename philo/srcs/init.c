@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 15:42:39 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/20 17:28:42 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	init_data(int argc, char **argv, t_data *data)
 	}
 	pthread_mutex_init(&(data->micro), NULL);
 	data->observer.end = 0;
+	pthread_mutex_init(&(data->observer.look_end), NULL);
 	data->start_time = get_current_time(data);
 	return (0);
 }
