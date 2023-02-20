@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:59:46 by jules             #+#    #+#             */
-/*   Updated: 2023/01/20 17:00:17 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/20 12:54:42 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int is_num(char *str)
 {

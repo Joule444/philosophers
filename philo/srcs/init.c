@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/07 16:44:37 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/20 15:42:39 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-void	init_observer(t_data *data)
-{
-	t_observer	observer;
-	
-	observer.end = 0;
-	data->observer = &observer;
-}
+#include "../includes/philo.h"
 
 int	init_data(int argc, char **argv, t_data *data)
 {
@@ -35,7 +27,6 @@ int	init_data(int argc, char **argv, t_data *data)
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->fork)
 		return (print_error("Malloc error\n"));
-	data->start_time = get_current_time(data);
 	i = 0;
 	while (i < data->nb_philo)
 	{
@@ -43,7 +34,8 @@ int	init_data(int argc, char **argv, t_data *data)
 		i++;
 	}
 	pthread_mutex_init(&(data->micro), NULL);
-	init_observer(data);
+	data->observer.end = 0;
+	data->start_time = get_current_time(data);
 	return (0);
 }
 
@@ -52,7 +44,7 @@ int	init_philo(t_philo **philo, t_data *data)
 	int	i;
 	
 	i = 0;
-	*philo = malloc(sizeof(t_philo) * data->nb_philo);
+	*philo = malloc(sizeof(t_philo) * data->nb_philo - 1);
 	if (!(*philo))
 		return (print_error("Malloc error\n"));
 	while (i < data->nb_philo)

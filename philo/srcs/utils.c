@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/02/10 12:46:05 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/20 13:53:28 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	ft_isdigit(int c)
 {
@@ -57,7 +57,7 @@ size_t	ft_strlen(const char *str)
 
 void	my_usleep(long time, t_philo philo)
 {
-	if (philo.data->observer->end == 1)
+	if (philo.data->observer.end == 1)
 		return ;
 	usleep(time);
 }

@@ -21,7 +21,7 @@ CFLAGS		=	-Wall -Wextra -Werror -g -pthread
 # Run 'make re MODE=fsanitize' to run fsanitize.
 MODE	= none
 ifeq ($(MODE), fsanitize)
-	CFLAGS	+= -fsanitize=thread -g3
+	# CFLAGS	+= -fsanitize=thread -g3
 endif
 
 CC			=	cc

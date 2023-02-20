@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   observer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/02/10 18:14:36 by jules            ###   ########.fr       */
+/*   Updated: 2023/02/20 13:20:47 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
 int	is_dead(t_philo philo)
 {
@@ -46,7 +46,7 @@ void	*observer(void *param)
 	int			i;
 
 	philo = param;
-	while (philo->data->observer->end == 0)
+	while (philo->data->observer.end == 0)
 	{
 		// pthread_mutex_lock(&philo->data->micro);
 		i = 0;
@@ -54,7 +54,7 @@ void	*observer(void *param)
 		{
 			pthread_mutex_lock(&philo->data->micro);
 			printf("[%ld] Every philos had at least %d meals\n", get_timestamp(*philo->data), philo->data->max_meals);
-			philo->data->observer->end = 1;
+			philo->data->observer.end = 1;
 			while (i < philo->data->nb_philo)
 			{
 				printf("%d mealcount = %d\n", philo[i].id, philo[i].meals);
@@ -62,7 +62,7 @@ void	*observer(void *param)
 			}
 			pthread_mutex_unlock(&philo->data->micro);
 		}
-		// while (i < philo->data->nb_philo && philo->data->observer->end == 0)
+		// while (i < philo->data->nb_philo && philo->data->observer.end == 0)
 		// {
 		// 	// printf("time=%ld\nlast_meal=%ld\nlast_meal - time=%ld\nttd=%ld\n", time, philo[i].last_meal, time - philo[i].last_meal, philo->data->ttd);
 		// 	// if (is_dead(philo[i]) == 1)
@@ -70,7 +70,7 @@ void	*observer(void *param)
 		// 	// 	// pthread_mutex_unlock(&philo->data->micro);
 		// 	// 	print_state(philo[i], DIED);
 		// 	// 	// pthread_mutex_lock(&philo->data->micro);
-		// 	// 	philo->data->observer->end = 1;
+		// 	// 	philo->data->observer.end = 1;
 		// 	// }
 		// 	i++;
 		// }
