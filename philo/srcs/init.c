@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 17:28:42 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:47:05 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,34 +36,35 @@ int	init_data(int argc, char **argv, t_data *data)
 	pthread_mutex_init(&(data->micro), NULL);
 	data->observer.end = 0;
 	pthread_mutex_init(&(data->observer.look_end), NULL);
-	data->start_time = get_current_time(data);
+	data->start_time = get_current_time();
 	return (0);
 }
 
-int	init_philo(t_philo **philo, t_data *data)
+t_philo *init_philo(t_philo *philo, t_data *data)
 {
 	int	i;
 	
 	i = 0;
-	*philo = malloc(sizeof(t_philo) * data->nb_philo - 1);
-	if (!(*philo))
-		return (print_error("Malloc error\n"));
+	philo = malloc(sizeof(t_philo) * 30);
+	//if (!philo)
+		//return (print_error("Malloc error\n"));
 	while (i < data->nb_philo)
 	{
-		(*philo)[i].id = i + 1;
-		(*philo)[i].data = data;
-		(*philo)[i].meals = 0;
-		(*philo)[i].last_meal = get_current_time(data);
-		(*philo)[i].left_hand = &data->fork[i];
-		if ((*philo)[i].id != 1)
+		philo[i].data = data;
+		philo[i].id = i + 1;
+		philo[i].meals = 0;
+		philo[i].left_hand = &data->fork[i];
+		if (philo[i].id != 1)
 		{
-			(*philo)[i].right_hand = &data->fork[i - 1];
+			philo[i].right_hand = &data->fork[i - 1];
 		}
 		else
 		{
-			(*philo)[i].right_hand = &data->fork[data->nb_philo - 1];
+			philo[i].right_hand = &data->fork[data->nb_philo - 1];
 		}
+		philo[i].last_meal = get_current_time();
 		i++;
 	}
-	return (0);
+	return (philo);
 }
+

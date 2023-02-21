@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 17:48:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/21 17:24:29 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	check_end(t_philo philo)
 		pthread_mutex_unlock(&philo.data->observer.look_end);
 		return (1);
 	}
-	pthread_mutex_lock(&philo.data->observer.look_end);
+	pthread_mutex_unlock(&philo.data->observer.look_end);
 	return (0);
 }
 
@@ -28,7 +28,7 @@ int	is_dead(t_philo philo)
 {
 	long	time;
 
-	time = get_current_time(philo.data);
+	time = get_current_time();
 	if (time - philo.last_meal > philo.data->ttd)
 	{
 		printf("time=%ld\nlast_meal=%ld\ntime - last_meal=%ld\nttd=%ld\n", time, philo.last_meal, time - philo.last_meal, philo.data->ttd);
@@ -58,38 +58,13 @@ void	*observer(void *param)
 	int			i;
 
 	philo = param;
-	while (philo->data->observer.end == 0)
+	while (check_end(*philo) == 0)
 	{
-		// pthread_mutex_lock(&philo->data->micro);
 		i = 0;
-		if (philo->data->max_meals != -1 && check_meals(philo) == 1)
+		while (i < philo->data->nb_philo)
 		{
-			pthread_mutex_lock(&philo->data->micro);
-			printf("[%ld] Every philos had at least %d meals\n", get_timestamp(*philo->data), philo->data->max_meals);
-			pthread_mutex_lock(&philo->data->observer.look_end);
-			philo->data->observer.end = 1;
-			pthread_mutex_unlock(&philo->data->observer.look_end);
-			while (i < philo->data->nb_philo)
-			{
-				printf("%d mealcount = %d\n", philo[i].id, philo[i].meals);
-				i++;
-			}
-			pthread_mutex_unlock(&philo->data->micro);
+			
 		}
-		// while (i < philo->data->nb_philo && philo->data->observer.end == 0)
-		// {
-		// 	// printf("time=%ld\nlast_meal=%ld\nlast_meal - time=%ld\nttd=%ld\n", time, philo[i].last_meal, time - philo[i].last_meal, philo->data->ttd);
-		// 	// if (is_dead(philo[i]) == 1)
-		// 	// {
-		// 	// 	// pthread_mutex_unlock(&philo->data->micro);
-		// 	// 	print_state(philo[i], DIED);
-		// 	// 	// pthread_mutex_lock(&philo->data->micro);
-		// 	// 	philo->data->observer.end = 1;
-		// 	// }
-		// 	i++;
-		// }
-		// pthread_mutex_unlock(&philo->data->micro);
-		my_usleep(700, *philo);
 	}
 	return (NULL);
 }

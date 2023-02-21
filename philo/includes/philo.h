@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/20 17:51:54 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/21 16:11:03 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_observer
 }	t_observer;
 
 
+
 typedef struct s_data
 {
 	time_t			start_time;
@@ -48,7 +49,7 @@ typedef struct s_data
 	int				max_meals;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	micro;
-	struct timeval	current_time;
+	// struct timeval	current_time;
 	t_observer		observer;
 }	t_data;
 
@@ -68,10 +69,10 @@ int 	check_args(int argc, char **argv);
 
 //Init
 int		init_data(int argc, char **argv, t_data *data);
-int		init_philo(t_philo **philo, t_data *data);
+t_philo	*init_philo(t_philo *philo, t_data *data);
 
 void	print_state(t_philo philo, int state);
-time_t	get_current_time(t_data *data);
+time_t	get_current_time(void);
 time_t	get_timestamp(t_data data);
 void	my_usleep(long time, t_philo philo);
 
