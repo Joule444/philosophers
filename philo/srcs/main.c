@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/21 16:47:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:44:11 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,10 @@ int main(int argc, char **argv)
 	if (init_data(argc, argv, &data))
 		return (2);
 	philo = init_philo(philo, &data);
-	if (philosophers(philo))
-		return (4);
+	if (philo == NULL)
+		return (3);
+	// if (philosophers(philo))
+	// 	return (4);
 	free(philo);
 	free(data.fork);
 	return (0);

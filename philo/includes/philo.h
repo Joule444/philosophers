@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/21 16:11:03 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/23 16:19:32 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef struct s_observer
 {
 	pthread_t		thread;
 	int				end;
-	pthread_mutex_t	look_end;
+	pthread_mutex_t	end_access;
 }	t_observer;
 
 
@@ -49,7 +49,9 @@ typedef struct s_data
 	int				max_meals;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	micro;
-	// struct timeval	current_time;
+	// pthread_mutex_t	start_time_access;
+	// pthread_mutex_t	tte_access;
+	// pthread_mutex_t	tts_access;
 	t_observer		observer;
 }	t_data;
 
