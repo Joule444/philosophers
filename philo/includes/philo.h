@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/23 16:19:32 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/24 16:23:24 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ typedef struct s_data
 	int				max_meals;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	micro;
-	// pthread_mutex_t	start_time_access;
-	// pthread_mutex_t	tte_access;
-	// pthread_mutex_t	tts_access;
 	t_observer		observer;
 }	t_data;
 
@@ -61,8 +58,6 @@ typedef struct  s_philo
 	int 			meals;
 	time_t			last_meal;
 	pthread_t		thread;
-	pthread_mutex_t	*left_hand;
-	pthread_mutex_t	*right_hand;
 	t_data			*data;
 }	t_philo;
 

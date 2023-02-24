@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/02/23 15:59:07 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/02/24 14:30:34 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 int	check_end(t_philo philo)
 {
-	pthread_mutex_lock(&philo.data->observer.end_access);
-	if (philo.data->observer.end == 1)
-	{
-		pthread_mutex_unlock(&philo.data->observer.end_access);
-		return (1);
-	}
-	pthread_mutex_unlock(&philo.data->observer.end_access);
+	(void) philo;
+	// pthread_mutex_lock(&philo.data->observer.end_access);
+	// if (philo.data->observer.end == 1)
+	// {
+	// 	pthread_mutex_unlock(&philo.data->observer.end_access);
+	// 	return (1);
+	// }
+	// pthread_mutex_unlock(&philo.data->observer.end_access);
 	return (0);
 }
 
