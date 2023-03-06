@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/06 15:10:47 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/06 17:48:33 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum	e_state
 
 typedef struct s_observer
 {
-	pthread_t		thread;
+	// pthread_t		thread;
 	int				end;
 	pthread_mutex_t	end_access;
 }	t_observer;
@@ -68,9 +68,9 @@ int 	check_args(int argc, char **argv);
 int		init_data(int argc, char **argv, t_data *data);
 t_philo	*init_philo(t_philo *philo, t_data *data);
 
-void	print_state(t_philo philo, int state);
+void	print_state(t_philo *philo, int state);
 time_t	get_current_time(void);
-time_t	get_timestamp(t_data data);
+time_t	get_timestamp(t_data *data);
 void	my_usleep(long time, t_philo philo);
 
 //Events
