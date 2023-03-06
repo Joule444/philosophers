@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/02/24 17:43:11 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:53:13 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ void	*routine(void *param)
 	// printf("Thread %d created\n", philo->id);
 	if (philo->id % 2 == 0 || philo->id == 0) //Retarde les pairs pour faire commencer impairs
 		my_usleep(300, *philo);
-	// while (check_end(*philo) == 0)
-	// {
-	// 	eating(philo);
-	// 	sleeping(philo);
-	// 	print_state(*philo, THINKING);
-	// }
-	eating(philo);
+	while (check_end(*philo) == 0)
+	{
+		eating_prep(philo);
+		sleeping(philo);
+		print_state(*philo, THINKING);
+	}
+	// eating_prep(philo);
 	// sleeping(philo);
 	// print_state(*philo, THINKING);
 	return (param);

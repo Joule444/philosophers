@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/02/24 16:23:24 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:10:47 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ time_t	get_timestamp(t_data data);
 void	my_usleep(long time, t_philo philo);
 
 //Events
-void	eating(t_philo *philo);
+void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2);
+void	eating_prep(t_philo *philo);
 void	sleeping(t_philo *philo);
 
 //Observer

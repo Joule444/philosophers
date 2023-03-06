@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/02/24 17:37:30 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/06 15:54:14 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	print_state(t_philo philo, int state)
 	// 	return ;
 	// }
 	ts = 0;
-	// ts = get_timestamp(*philo.data);
+	// ts = get_timestamp(*philo.data);s
 	if (state == EATING)
 		printf("%ld\t\033[31;01m%d is eating\033[00m\n", ts, philo.id + 1);
 	else if (state == SLEEPING)
