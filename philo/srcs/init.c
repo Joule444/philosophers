@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/02/24 17:15:56 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/07 17:14:05 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	init_data(int argc, char **argv, t_data *data)
 		i++;
 	}
 	pthread_mutex_init(&(data->micro), NULL);
+	pthread_mutex_init(&(data->last_meal_access), NULL);
 	pthread_mutex_init(&(data->observer.end_access), NULL);
 	data->observer.end = 0;
 	data->start_time = get_current_time();

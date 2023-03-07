@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 13:58:32 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/07 17:15:55 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,16 @@ int	check_end(t_philo *philo)
 	return (0);
 }
 
-int	is_dead(t_philo philo)
+int	is_dead(t_philo *philo)
 {
-	long	time;
+	time_t	time;
 
+	pthread_mutex_lock(&philo->data->last_meal_access);
 	time = get_current_time();
-	if (time - philo.last_meal > philo.data->ttd)
-	{
-		printf("time=%ld\nlast_meal=%ld\ntime - last_meal=%ld\nttd=%ld\n", time, philo.last_meal, time - philo.last_meal, philo.data->ttd);
-		return (1);
-	}
+	if (time - philo->last_meal > philo->data->ttd) //Dead
+		return (pthread_mutex_unlock(&philo->data->last_meal_access), 1);
 	else
-		return (0);
+		return (pthread_mutex_unlock(&philo->data->last_meal_access), 0);
 }
 
 int	check_meals(t_philo *philo)
@@ -63,8 +61,16 @@ void	*observer(void *param)
 		i = 0;
 		while (i < philo->data->nb_philo)
 		{
-			
+			if (is_dead(&philo[i]))
+			{
+				pthread_mutex_lock(&philo->data->observer.end_access);
+				philo->data->observer.end = 1;
+				pthread_mutex_unlock(&philo->data->observer.end_access);
+			}
+			i++;
 		}
+		// my_usleep(700, philo);
+		usleep(700);
 	}
 	return (NULL);
 }

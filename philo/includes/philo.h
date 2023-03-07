@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 13:58:49 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/07 17:10:34 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ enum	e_state
 
 typedef struct s_observer
 {
-	// pthread_t		thread;
+	pthread_t		thread;
 	int				end;
 	pthread_mutex_t	end_access;
 }	t_observer;
@@ -49,6 +49,7 @@ typedef struct s_data
 	int				max_meals;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	micro;
+	pthread_mutex_t	last_meal_access;
 	t_observer		observer;
 }	t_data;
 
