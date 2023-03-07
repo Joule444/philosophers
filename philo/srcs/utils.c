@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 13:59:17 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/07 18:51:59 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,19 @@ size_t	ft_strlen(const char *str)
 }
 
 void	my_usleep(long time, t_philo *philo)
-{
-	if (check_end(philo) == 1)
-		return ;
-	usleep(time);
+{ 
+	long	t;
+	long	goal;
+	
+	t = get_current_time();
+	goal = get_current_time() + time;
+	while (t < goal)
+	{
+		if (check_end(philo) == 1)
+			return ;
+		usleep(50);
+		t = get_current_time();
+	}
 }
 
 int print_error(char *str)
