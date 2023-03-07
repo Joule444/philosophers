@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   logs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/03/06 17:50:26 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:57:52 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,11 @@ void	print_state(t_philo *philo, int state)
 	long	ts;
 	
 	pthread_mutex_lock(&philo->data->micro);
-	// if (check_end(philo) == 1)
-	// {
-	// 	pthread_mutex_unlock(&philo.data->micro);
-	// 	return ;
-	// }
-	// ts = 0;
+	if (check_end(philo) == 1)
+	{
+		pthread_mutex_unlock(&philo->data->micro);
+		return ;
+	}
 	ts = get_timestamp(philo->data);
 	if (state == EATING)
 		printf("%ld\t\033[31;01m%d is eating\033[00m\n", ts, philo->id + 1);

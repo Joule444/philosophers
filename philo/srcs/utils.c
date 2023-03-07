@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/06 15:55:50 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:59:17 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-void	my_usleep(long time, t_philo philo)
+void	my_usleep(long time, t_philo *philo)
 {
 	if (check_end(philo) == 1)
 		return ;

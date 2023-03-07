@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/06 17:51:16 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:59:14 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	*routine(void *param)
 
 	philo = param;
 	if (philo->id % 2 == 0 || philo->id == 0) //Retarde les pairs pour faire commencer impairs
-		my_usleep(300, *philo);
-	while (check_end(*philo) == 0)
+		my_usleep(300, philo);
+	while (check_end(philo) == 0)
 	{
 		eating_prep(philo);
 		sleeping(philo);

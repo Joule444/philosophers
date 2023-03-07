@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/06 17:48:33 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:58:49 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_philo	*init_philo(t_philo *philo, t_data *data);
 void	print_state(t_philo *philo, int state);
 time_t	get_current_time(void);
 time_t	get_timestamp(t_data *data);
-void	my_usleep(long time, t_philo philo);
+void	my_usleep(long time, t_philo *philo);
 
 //Events
 void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2);
@@ -81,7 +81,7 @@ void	sleeping(t_philo *philo);
 //Observer
 void	*observer(void *param);
 
-int	check_end(t_philo philo);
+int	check_end(t_philo *philo);
 
 //Utils
 int		ft_atoi(const char *str);

@@ -3,25 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   observer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/02/24 14:30:34 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/07 13:58:32 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	check_end(t_philo philo)
+int	check_end(t_philo *philo)
 {
-	(void) philo;
-	// pthread_mutex_lock(&philo.data->observer.end_access);
-	// if (philo.data->observer.end == 1)
-	// {
-	// 	pthread_mutex_unlock(&philo.data->observer.end_access);
-	// 	return (1);
-	// }
-	// pthread_mutex_unlock(&philo.data->observer.end_access);
+	pthread_mutex_lock(&philo->data->observer.end_access);
+	if (philo->data->observer.end == 1)
+	{
+		pthread_mutex_unlock(&philo->data->observer.end_access);
+		return (1);
+	}
+	pthread_mutex_unlock(&philo->data->observer.end_access);
 	return (0);
 }
 
@@ -59,7 +58,7 @@ void	*observer(void *param)
 	int			i;
 
 	philo = param;
-	while (check_end(*philo) == 0)
+	while (check_end(philo) == 0)
 	{
 		i = 0;
 		while (i < philo->data->nb_philo)
