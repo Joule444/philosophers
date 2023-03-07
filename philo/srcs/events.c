@@ -6,7 +6,7 @@
 /*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 13:59:11 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/07 17:32:05 by jules            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2)
 		print_state(philo, HAS_TAKEN_A_FORK);
 	}
 	print_state(philo, EATING);
+	pthread_mutex_lock(&philo->data->last_meal_access);
 	philo->last_meal = get_current_time();
+	pthread_mutex_unlock(&philo->data->last_meal_access);
 	my_usleep(philo->data->tte * 1000, philo);
 	philo->meals++;
 	 
