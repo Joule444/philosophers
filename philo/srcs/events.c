@@ -6,12 +6,13 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:24:16 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:34:34 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+//Eating event
 void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2)
 {
 	if (philo->id % 2 != 0) //Si id pair -> commence par prendre fork1
@@ -21,7 +22,7 @@ void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2)
 		pthread_mutex_lock(fork2);
 		print_state(philo, HAS_TAKEN_A_FORK);
 	}
-	else										//Si id impair -> commece par prendre fork2
+	else					//Si id impair -> commece par prendre fork2
 	{
 		pthread_mutex_lock(fork2);
 		print_state(philo, HAS_TAKEN_A_FORK);
@@ -39,6 +40,7 @@ void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2)
 	pthread_mutex_unlock(fork1);
 }
 
+//Attribu ses fourchettes a philo
 void	eating_prep(t_philo *philo)
 {
 	pthread_mutex_t	*fork1;
@@ -52,9 +54,9 @@ void	eating_prep(t_philo *philo)
 	eating(philo, fork1, fork2);
 }
 
+//Sleeping event
 void	sleeping(t_philo *philo)
 {
-	
 	print_state(philo, SLEEPING);
 	my_usleep(philo->data->tts, philo);
 }

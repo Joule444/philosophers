@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   logs.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 13:57:52 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/09 18:35:48 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+//Retourne le temps actuel
 time_t	get_current_time(void)
 {
 	struct timeval	current_time;
@@ -22,6 +23,7 @@ time_t	get_current_time(void)
 	return (time);
 }
 
+//Retourne le timestamp depuis le temps de depart
 time_t	get_timestamp(t_data *data)
 {
 	time_t	time;
@@ -30,6 +32,7 @@ time_t	get_timestamp(t_data *data)
 	return (time - data->start_time);
 }
 
+//Print les actions des philos
 void	print_state(t_philo *philo, int state)
 {
 	long	ts;

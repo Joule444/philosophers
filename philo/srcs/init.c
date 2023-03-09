@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 17:14:05 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/09 18:38:31 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+//Set les valeurs de la structure data
 int	init_data(int argc, char **argv, t_data *data)
 {
 	int	i;
@@ -41,6 +42,7 @@ int	init_data(int argc, char **argv, t_data *data)
 	return (0);
 }
 
+//Set les valeurs de chaque philo
 t_philo *init_philo(t_philo *philo, t_data *data)
 {
 	int	i;

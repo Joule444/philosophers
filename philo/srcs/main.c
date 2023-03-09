@@ -6,12 +6,13 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:26:43 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:31:49 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+//Routine des philos
 void	*routine(void *param)
 {
 	t_philo *philo;
@@ -28,6 +29,7 @@ void	*routine(void *param)
 	return (param);
 }
 
+//Creation de tous les threads du programme (philos + observer)
 int	philosophers(t_philo *philo)
 {
 	int i;

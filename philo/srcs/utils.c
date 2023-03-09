@@ -6,12 +6,13 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:26:19 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/09 18:40:33 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+//Check si c est un digit
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
@@ -19,6 +20,7 @@ int	ft_isdigit(int c)
 	return (0);
 }
 
+//Converti un num str en int
 int	ft_atoi(const char *str)
 {
 	int	    i;
@@ -45,6 +47,7 @@ int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
+//Retourne la taille d'une string
 size_t	ft_strlen(const char *str)
 {
 	int	i;
@@ -55,6 +58,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
+//Usleep qui se stop si condition de fin
 void	my_usleep(long time, t_philo *philo)
 { 
 	long	t;
@@ -71,6 +75,7 @@ void	my_usleep(long time, t_philo *philo)
 	}
 }
 
+//Print une erreur sur la sortie d'erreur
 int print_error(char *str)
 {
 	write(2, str, ft_strlen(str));
