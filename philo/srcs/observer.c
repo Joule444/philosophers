@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   observer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 18:56:33 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/09 17:48:35 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,18 @@ int	is_dead(t_philo *philo)
 	pthread_mutex_lock(&philo->data->last_meal_access);
 	time = get_current_time();
 	if (time - philo->last_meal > philo->data->ttd) //Dead
-		return (pthread_mutex_unlock(&philo->data->last_meal_access), 1);
+	{
+		// pthread_mutex_lock(&philo->data->micro);
+		// printf("time=%ld\nlast_meal=%ld\nttd=%ld\n", time, philo->last_meal, philo->data->ttd);
+		// pthread_mutex_unlock(&philo->data->micro);
+		pthread_mutex_unlock(&philo->data->last_meal_access);
+		return (1);
+	}
 	else
-		return (pthread_mutex_unlock(&philo->data->last_meal_access), 0);
+	{
+		pthread_mutex_unlock(&philo->data->last_meal_access);
+		return (0);
+	}
 }
 
 int	check_meals(t_philo *philo)

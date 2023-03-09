@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 18:51:59 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/09 18:26:19 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,14 @@ void	my_usleep(long time, t_philo *philo)
 	long	t;
 	long	goal;
 	
-	t = get_current_time();
-	goal = get_current_time() + time;
+	t = get_current_time(); //1000
+	goal = t + time; //1000 + 500 = 1500
 	while (t < goal)
 	{
 		if (check_end(philo) == 1)
 			return ;
 		usleep(50);
-		t = get_current_time();
+		t = get_current_time(); //1050
 	}
 }
 
