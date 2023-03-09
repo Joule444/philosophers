@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:33:42 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:26:08 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_dead(t_philo *philo)
 	}
 }
 
-//WIP
+//WIP Helgrind issues
 int	check_meals(t_philo *philo)
 {
 	int	i;
@@ -52,8 +52,13 @@ int	check_meals(t_philo *philo)
 	i = 0;
 	while (i < philo->data->nb_philo)
 	{
-		if (philo->meals < philo->data->max_meals)
+		pthread_mutex_lock(&philo->data->last_meal_access);
+		if (philo[i].meals < philo->data->max_meals)
+		{
+			pthread_mutex_unlock(&philo->data->last_meal_access);
 			return (0);
+		}
+		pthread_mutex_unlock(&philo->data->last_meal_access);
 		i++;
 	}
 	return (1);
@@ -74,6 +79,12 @@ void	*observer(void *param)
 			if (is_dead(&philo[i]))
 			{
 				print_state(&philo[i], DIED);
+				pthread_mutex_lock(&philo->data->observer.end_access);
+				philo->data->observer.end = 1;
+				pthread_mutex_unlock(&philo->data->observer.end_access);
+			}
+			if (philo->data->max_meals != -1 && check_meals(philo) == 1)
+			{
 				pthread_mutex_lock(&philo->data->observer.end_access);
 				philo->data->observer.end = 1;
 				pthread_mutex_unlock(&philo->data->observer.end_access);
