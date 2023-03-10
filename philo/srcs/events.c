@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 14:58:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:45:39 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 //Eating event
 void	eating(t_philo *philo, t_fork fork1, t_fork fork2)
 {
+	if (philo->id % 2 == 0)
+		my_usleep(philo->data->tte, philo);
 	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(fork1.a);
