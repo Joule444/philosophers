@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jules <jules@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/07 17:10:34 by jules            ###   ########.fr       */
+/*   Updated: 2023/03/10 14:52:23 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+
 enum	e_state
 {
 	EATING,
@@ -30,14 +31,17 @@ enum	e_state
 	DIED
 };
 
+typedef struct s_fork
+{
+	pthread_mutex_t	*a;
+}	t_fork;
+
 typedef struct s_observer
 {
 	pthread_t		thread;
 	int				end;
 	pthread_mutex_t	end_access;
 }	t_observer;
-
-
 
 typedef struct s_data
 {
@@ -75,9 +79,9 @@ time_t	get_timestamp(t_data *data);
 void	my_usleep(long time, t_philo *philo);
 
 //Events
-void	eating(t_philo *philo, pthread_mutex_t *fork1, pthread_mutex_t *fork2);
-void	eating_prep(t_philo *philo);
-void	sleeping(t_philo *philo);
+void	eating(t_philo *philo, t_fork fork1, t_fork fork2);
+void	sleeping(t_philo *philo, t_fork fork1, t_fork fork2);
+void	eat_sleep(t_philo *philo);
 
 //Observer
 void	*observer(void *param);

@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:31:49 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:45:02 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	*routine(void *param)
 		my_usleep(300, philo);
 	while (check_end(philo) == 0)
 	{
-		eating_prep(philo);
-		sleeping(philo);
+		eat_sleep(philo);
 		print_state(philo, THINKING);
 	}
 	return (param);

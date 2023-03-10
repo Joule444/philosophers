@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 19:26:08 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:40:36 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,20 @@ int	check_meals(t_philo *philo)
 	i = 0;
 	while (i < philo->data->nb_philo)
 	{
-		pthread_mutex_lock(&philo->data->last_meal_access);
+		// pthread_mutex_lock(&philo->data->last_meal_access);
+		// pthread_mutex_lock(&philo->data->meals_access);
 		if (philo[i].meals < philo->data->max_meals)
 		{
-			pthread_mutex_unlock(&philo->data->last_meal_access);
+			// pthread_mutex_unlock(&philo->data->meals_access);
+			// pthread_mutex_unlock(&philo->data->last_meal_access);
 			return (0);
 		}
-		pthread_mutex_unlock(&philo->data->last_meal_access);
+		// pthread_mutex_unlock(&philo->data->meals_access);
+		// pthread_mutex_unlock(&philo->data->last_meal_access);
 		i++;
 	}
 	return (1);
+	// return (0);
 }
 
 //Routine du thread verifiant les conditions de fin
@@ -91,8 +95,8 @@ void	*observer(void *param)
 			}
 			i++;
 		}
-		// my_usleep(700, philo);
-		usleep(700);
+		my_usleep(700, philo);
+		// usleep(700);
 	}
 	return (NULL);
 }
