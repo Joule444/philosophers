@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 14:45:02 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 17:02:17 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 //Routine des philos
 void	*routine(void *param)
 {
-	t_philo *philo;
+	t_philo	*philo;
 
 	philo = param;
-	if (philo->id % 2 == 0 || philo->id == 0) //Retarde les pairs pour faire commencer impairs
-		my_usleep(300, philo);
+	if (philo->id % 2 == 0 || philo->id == 0)
+		my_usleep(philo->data->tte, philo);
 	while (check_end(philo) == 0)
 	{
 		eat_sleep(philo);
@@ -31,17 +31,20 @@ void	*routine(void *param)
 //Creation de tous les threads du programme (philos + observer)
 int	philosophers(t_philo *philo)
 {
-	int i;
-	
+	int	i;
+	int	ret;
+
 	i = 0;
-	if (pthread_create(&philo->data->observer.thread, NULL, &observer, philo) != 0)
-			return (print_error("Thread create error\n"));
+	ret = pthread_create(&philo->data->observer.thread, NULL, &observer, philo);
+	if (ret != 0)
+		return (print_error("Thread create error\n"));
 	while (i < philo[0].data->nb_philo)
 	{
-		if (pthread_create(&(philo[i].thread), NULL, &routine, &philo[i]) != 0)
+		ret = pthread_create(&(philo[i].thread), NULL, &routine, &philo[i]);
+		if (ret != 0)
 			return (print_error("Thread create error\n"));
 		i++;
-  	}
+	}
 	i = 0;
 	while (i < philo[0].data->nb_philo)
 	{
@@ -54,10 +57,10 @@ int	philosophers(t_philo *philo)
 	return (0);
 }
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_data  data;
-	t_philo *philo;
+	t_data	data;
+	t_philo	*philo;
 
 	philo = NULL;
 	if (check_args(argc, argv) == 1)

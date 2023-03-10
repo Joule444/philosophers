@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:35:48 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 15:09:19 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 time_t	get_current_time(void)
 {
 	struct timeval	current_time;
-	time_t	time;
+	time_t			time;
 
 	gettimeofday(&current_time, NULL);
 	time = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
@@ -36,7 +36,7 @@ time_t	get_timestamp(t_data *data)
 void	print_state(t_philo *philo, int state)
 {
 	long	ts;
-	
+
 	pthread_mutex_lock(&philo->data->micro);
 	if (check_end(philo) == 1)
 	{

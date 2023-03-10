@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 14:44:49 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:59:29 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 int	init_data(int argc, char **argv, t_data *data)
 {
 	int	i;
-	
+
 	data->nb_philo = ft_atoi(argv[1]);
 	data->ttd = ft_atoi(argv[2]);
-	data->tte = ft_atoi(argv[3]); 
+	data->tte = ft_atoi(argv[3]);
 	data->tts = ft_atoi(argv[4]);
 	if (argc == 6)
 		data->max_meals = ft_atoi(argv[5]);
@@ -43,10 +43,10 @@ int	init_data(int argc, char **argv, t_data *data)
 }
 
 //Set les valeurs de chaque philo
-t_philo *init_philo(t_philo *philo, t_data *data)
+t_philo	*init_philo(t_philo *philo, t_data *data)
 {
 	int	i;
-	
+
 	i = 0;
 	philo = malloc(sizeof(t_philo) * data->nb_philo);
 	if (!philo)
@@ -57,7 +57,7 @@ t_philo *init_philo(t_philo *philo, t_data *data)
 		philo[i].id = i;
 		philo[i].meals = 0;
 		philo[i].last_meal = philo->data->start_time;
-		i++; 
+		i++;
 	}
 	return (philo);
 }

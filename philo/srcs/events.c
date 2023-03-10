@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 14:50:39 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:58:38 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 //Eating event
 void	eating(t_philo *philo, t_fork fork1, t_fork fork2)
 {
-	if (philo->id % 2 != 0) //Si id pair -> commence par prendre fork1
+	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(fork1.a);
 		print_state(philo, HAS_TAKEN_A_FORK);
 		pthread_mutex_lock(fork2.a);
 		print_state(philo, HAS_TAKEN_A_FORK);
 	}
-	else					//Si id impair -> commece par prendre fork2
+	else
 	{
 		pthread_mutex_lock(fork2.a);
 		print_state(philo, HAS_TAKEN_A_FORK);
@@ -51,7 +51,7 @@ void	eat_sleep(t_philo *philo)
 {
 	t_fork	fork1;
 	t_fork	fork2;
-	
+
 	fork1.a = &philo->data->fork[philo->id];
 	if (philo->id == philo->data->nb_philo - 1)
 		fork2.a = &philo->data->fork[0];
@@ -60,4 +60,3 @@ void	eat_sleep(t_philo *philo)
 	eating(philo, fork1, fork2);
 	sleeping(philo, fork1, fork2);
 }
-

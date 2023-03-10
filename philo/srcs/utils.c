@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:40:33 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:56:44 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,14 @@ void	my_usleep(long time, t_philo *philo)
 	long	t;
 	long	goal;
 	
-	t = get_current_time(); //1000
-	goal = t + time; //1000 + 500 = 1500
+	t = get_current_time();
+	goal = t + time;
 	while (t < goal)
 	{
 		if (check_end(philo) == 1)
 			return ;
 		usleep(50);
-		t = get_current_time(); //1050
+		t = get_current_time();
 	}
 }
 
