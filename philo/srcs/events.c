@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/11 15:06:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/11 18:32:42 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,24 @@
 //Eating event
 void	eating(t_philo *philo, t_fork fork1, t_fork fork2)
 {
-	// if (philo->id % 2 == 0)
-	// 	my_usleep(philo->data->tte, philo);
-	if (philo->id % 2 != 0)
-	{
-		pthread_mutex_lock(fork1.a);
-		print_state(philo, HAS_TAKEN_A_FORK);
-		pthread_mutex_lock(fork2.a);
-		print_state(philo, HAS_TAKEN_A_FORK);
-	}
-	else
-	{
-		pthread_mutex_lock(fork2.a);
-		print_state(philo, HAS_TAKEN_A_FORK);
-		pthread_mutex_lock(fork1.a);
-		print_state(philo, HAS_TAKEN_A_FORK);
-	}
+	// if (philo->id % 2 != 0)
+	// {
+	// 	pthread_mutex_lock(fork1.a);
+	// 	print_state(philo, HAS_TAKEN_A_FORK);
+	// 	pthread_mutex_lock(fork2.a);
+	// 	print_state(philo, HAS_TAKEN_A_FORK);
+	// }
+	// else
+	// {
+	// 	pthread_mutex_lock(fork2.a);
+	// 	print_state(philo, HAS_TAKEN_A_FORK);
+	// 	pthread_mutex_lock(fork1.a);
+	// 	print_state(philo, HAS_TAKEN_A_FORK);
+	// }
+	pthread_mutex_lock(fork2.a);
+	print_state(philo, HAS_TAKEN_A_FORK);
+	pthread_mutex_lock(fork1.a);
+	print_state(philo, HAS_TAKEN_A_FORK);
 	print_state(philo, EATING);
 	pthread_mutex_lock(&philo->data->last_meal_access);
 	philo->last_meal = get_current_time();
