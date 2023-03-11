@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 16:55:40 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:46:02 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_dead(t_philo *philo)
 
 	pthread_mutex_lock(&philo->data->last_meal_access);
 	time = get_current_time();
-	if (time - philo->last_meal >= philo->data->ttd)
+	if (time - philo->last_meal > philo->data->ttd)
 	{
 		pthread_mutex_unlock(&philo->data->last_meal_access);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 17:50:43 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/11 14:59:22 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	*routine(void *param)
 	t_philo	*philo;
 
 	philo = param;
-	// if (philo->id % 2 == 0 || philo->id == 0)
-	// 	my_usleep(philo->data->tte, philo);
+	if (philo->id % 2 == 0 || philo->id == 0)
+		my_usleep(philo->data->tte, philo);
 	while (check_end(philo) == 0)
 	{
 		eat_sleep(philo);
 		print_state(philo, THINKING);
-		if (philo->id % 2 != 0)
-			my_usleep(60, philo);
+		// if (philo->id % 2 != 0)
+		// 	my_usleep(60, philo);
 	}
 	return (param);
 }
