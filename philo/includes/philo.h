@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 18:02:08 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:57:49 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	*observer(void *param);
 int	check_end(t_philo *philo);
 
 //Utils
-int		ft_atoi(const char *str);
+long		ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
 int		print_error(char *str);
 

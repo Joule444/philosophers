@@ -6,11 +6,22 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 14:48:10 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:08:22 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+int	check_limits(t_data *data)
+{
+	if (data->ttd > 2147483647 || data->tte > 2147483647
+		|| data->tts > 2147483647)
+		return (1);
+	else if (data->ttd < -2147483648 || data->tte < -2147483648
+		|| data->tts < -2147483648)
+		return (1);
+	return (0);
+}
 
 //Set les valeurs de la structure data
 int	init_data(int argc, char **argv, t_data *data)
@@ -21,6 +32,8 @@ int	init_data(int argc, char **argv, t_data *data)
 	data->ttd = ft_atoi(argv[2]);
 	data->tte = ft_atoi(argv[3]);
 	data->tts = ft_atoi(argv[4]);
+	if (check_limits(data) == 1)
+		return (1);
 	if (argc == 6)
 		data->max_meals = ft_atoi(argv[5]);
 	else
