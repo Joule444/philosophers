@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 20:51:52 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:19:13 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	will_die(t_philo *philo)
 	ttd = philo->data->ttd;
 	tte = philo->data->tte;
 	tts = philo->data->tts;
+	if (philo->data->nb_philo == 1)
+		return (1);
 	if (philo->data->nb_philo % 2 == 0)
 	{
 		if (ttd < tte + tts)
