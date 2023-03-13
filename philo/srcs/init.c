@@ -6,12 +6,13 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 21:15:48 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:30:27 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+//Check int max et 0 dans les args
 int	check_limits(t_data *data)
 {
 	if (data->ttd > 2147483647 || data->tte > 2147483647
@@ -23,6 +24,14 @@ int	check_limits(t_data *data)
 	if (data->nb_philo == 0)
 		return (1);
 	return (0);
+}
+
+//Init les mutex de data
+void	init_mutex(t_data *data)
+{
+	pthread_mutex_init(&(data->micro), NULL);
+	pthread_mutex_init(&(data->last_meal_access), NULL);
+	pthread_mutex_init(&(data->observer.end_access), NULL);
 }
 
 //Set les valeurs de la structure data
@@ -49,9 +58,7 @@ int	init_data(int argc, char **argv, t_data *data)
 		pthread_mutex_init(&(data->fork[i]), NULL);
 		i++;
 	}
-	pthread_mutex_init(&(data->micro), NULL);
-	pthread_mutex_init(&(data->last_meal_access), NULL);
-	pthread_mutex_init(&(data->observer.end_access), NULL);
+	init_mutex(data);
 	data->observer.end = 0;
 	data->start_time = get_current_time();
 	return (0);

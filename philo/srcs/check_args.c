@@ -6,16 +6,16 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 16:59:46 by jules             #+#    #+#             */
-/*   Updated: 2023/03/09 18:38:01 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:41:14 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
 //Check si str est compose que de num
-int is_num(char *str)
+int	is_num(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -28,9 +28,9 @@ int is_num(char *str)
 }
 
 //Check si les args sont valides
-int check_args(int argc, char **argv)
+int	check_args(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (argc != 5 && argc != 6)

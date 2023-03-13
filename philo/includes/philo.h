@@ -6,21 +6,20 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 20:57:49 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:44:21 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-#include <stdio.h>
-#include <sys/stat.h>
-#include <sys/time.h>
-#include <sys/types.h>
-#include <pthread.h>
-#include <unistd.h>
-#include <stdlib.h>
-
+# include <stdio.h>
+# include <sys/stat.h>
+# include <sys/time.h>
+# include <sys/types.h>
+# include <pthread.h>
+# include <unistd.h>
+# include <stdlib.h>
 
 enum	e_state
 {
@@ -46,10 +45,10 @@ typedef struct s_observer
 typedef struct s_data
 {
 	time_t			start_time;
-	time_t  		ttd;
-	time_t  		tte;
-	time_t  		tts;
-	int     		nb_philo;
+	time_t			ttd;
+	time_t			tte;
+	time_t			tts;
+	int				nb_philo;
 	int				max_meals;
 	pthread_mutex_t	*fork;
 	pthread_mutex_t	micro;
@@ -57,17 +56,17 @@ typedef struct s_data
 	t_observer		observer;
 }	t_data;
 
-typedef struct  s_philo
+typedef struct s_philo
 {
 	int				id;
-	int 			meals;
+	int				meals;
 	time_t			last_meal;
 	pthread_t		thread;
 	t_data			*data;
 }	t_philo;
 
 //Check Args
-int 	check_args(int argc, char **argv);
+int		check_args(int argc, char **argv);
 
 //Init
 int		init_data(int argc, char **argv, t_data *data);
@@ -85,12 +84,13 @@ void	eat_sleep(t_philo *philo);
 
 //Observer
 void	*observer(void *param);
-
-int	check_end(t_philo *philo);
+int		check_end(t_philo *philo);
 
 //Utils
-long		ft_atoi(const char *str);
+long	ft_atoi(const char *str);
 size_t	ft_strlen(const char *str);
 int		print_error(char *str);
+int		will_die(t_philo *philo);
+void	set_end(t_observer *observer);
 
 #endif

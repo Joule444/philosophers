@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 20:58:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:41:55 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	ft_isdigit(int c)
 //Converti un num str en int
 long	ft_atoi(const char *str)
 {
-	long	    i;
-	long		res;
-	long		sign;
+	long	i;
+	long	res;
+	long	sign;
 
 	i = 0;
 	res = 0;
@@ -63,7 +63,7 @@ void	my_usleep(long time, t_philo *philo)
 {
 	long	t;
 	long	goal;
-	
+
 	t = get_current_time();
 	goal = t + time;
 	while (t < goal)
@@ -76,7 +76,7 @@ void	my_usleep(long time, t_philo *philo)
 }
 
 //Print une erreur sur la sortie d'erreur
-int print_error(char *str)
+int	print_error(char *str)
 {
 	write(2, str, ft_strlen(str));
 	return (1);

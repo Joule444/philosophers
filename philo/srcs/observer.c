@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 21:19:13 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 21:40:38 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,28 +59,15 @@ int	check_meals(t_philo *philo)
 	return (1);
 }
 
-int	will_die(t_philo *philo)
+//Usleep en fonction de la simu
+void	good_usleep(t_philo *philo)
 {
-	time_t	ttd;
-	time_t	tte;
-	time_t	tts;
-
-	ttd = philo->data->ttd;
-	tte = philo->data->tte;
-	tts = philo->data->tts;
-	if (philo->data->nb_philo == 1)
-		return (1);
-	if (philo->data->nb_philo % 2 == 0)
-	{
-		if (ttd < tte + tts)
-			return (1);
-	}
+	if (will_die(philo) == 1)
+		my_usleep(5, philo);
+	else if (philo->data->tts < philo->data->tte)
+		my_usleep(philo->data->tts, philo);
 	else
-	{
-		if (ttd < tte + tts + tte)
-			return (1);
-	}
-	return (0);
+		my_usleep(philo->data->tte, philo);
 }
 
 //Routine du thread verifiant les conditions de fin
@@ -98,24 +85,13 @@ void	*observer(void *param)
 			if (is_dead(&philo[i]))
 			{
 				print_state(&philo[i], DIED);
-				pthread_mutex_lock(&philo->data->observer.end_access);
-				philo->data->observer.end = 1;
-				pthread_mutex_unlock(&philo->data->observer.end_access);
+				set_end(&philo->data->observer);
 			}
 			else if (philo->data->max_meals != -1 && check_meals(philo) == 1)
-			{
-				pthread_mutex_lock(&philo->data->observer.end_access);
-				philo->data->observer.end = 1;
-				pthread_mutex_unlock(&philo->data->observer.end_access);
-			}
+				set_end(&philo->data->observer);
+			good_usleep(philo);
 			i++;
-		}
-		if (will_die(philo) == 1)
-			my_usleep(5, philo);
-		else if (philo->data->tts < philo->data->tte)
-			my_usleep(philo->data->tts, philo);
-		else
-			my_usleep(philo->data->tte, philo);
+		}	
 	}
 	return (NULL);
 }
