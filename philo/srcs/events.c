@@ -6,34 +6,32 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 18:48:30 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:33:09 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+void	take_fork(t_fork fork, t_philo *philo)
+{
+	pthread_mutex_lock(fork.a);
+	print_state(philo, HAS_TAKEN_A_FORK);
+}
+
 //Eating event
 void	eating(t_philo *philo, t_fork fork1, t_fork fork2)
 {
-	// if (philo->data->nb_philo % 2 == 0 && philo->id % 2 == 0)
-	// {
-	// 	pthread_mutex_lock(fork2.a);
-	// 	print_state(philo, HAS_TAKEN_A_FORK);
-	// 	pthread_mutex_lock(fork1.a);
-	// 	print_state(philo, HAS_TAKEN_A_FORK);
-	// }
-	// else if (philo->data->nb_philo % 2 == 0 && philo->id % 2 != 0)
-	// {
-	// 	pthread_mutex_lock(fork1.a);
-	// 	print_state(philo, HAS_TAKEN_A_FORK);
-	// 	pthread_mutex_lock(fork2.a);
-	// 	print_state(philo, HAS_TAKEN_A_FORK);
-	// }
-	pthread_mutex_lock(fork2.a);
-	print_state(philo, HAS_TAKEN_A_FORK);
-	pthread_mutex_lock(fork1.a);
-	print_state(philo, HAS_TAKEN_A_FORK);
-	
+	if (philo->id % 2 == 0)
+	{
+		take_fork(fork2, philo);
+		take_fork(fork1, philo);
+	}
+	else if (philo->id % 2 != 0)
+	{
+		take_fork(fork1, philo);
+		take_fork(fork2, philo);
+	}
+
 	print_state(philo, EATING);	
 	pthread_mutex_lock(&philo->data->last_meal_access);
 	philo->last_meal = get_current_time();
@@ -45,6 +43,7 @@ void	eating(t_philo *philo, t_fork fork1, t_fork fork2)
 //Sleeping event
 void	sleeping(t_philo *philo, t_fork fork1, t_fork fork2)
 {
+	if (philo)
 	pthread_mutex_unlock(fork2.a);
 	pthread_mutex_unlock(fork1.a);
 	print_state(philo, SLEEPING);

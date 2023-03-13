@@ -6,11 +6,26 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 18:46:34 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 20:38:47 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+void	wait_hungry(t_philo *philo)
+{
+	while ((get_current_time() - philo->last_meal) < ((3 * philo->data->ttd) / 4))
+	{
+		my_usleep(50, philo);
+	}
+}
+
+void	thinking(t_philo *philo)
+{
+	print_state(philo, THINKING);
+	if (philo->data->nb_philo % 2 != 0)
+		wait_hungry(philo);
+}
 
 //Routine des philos
 void	*routine(void *param)
@@ -22,12 +37,12 @@ void	*routine(void *param)
 		return (print_state(philo, HAS_TAKEN_A_FORK), param);
 	if (philo->id % 2 != 0)
 		my_usleep(philo->data->tte / 3, philo);
-	if (philo->id == philo->data->nb_philo - 1)
+	if (philo->data->nb_philo % 2 != 0 && philo->id == philo->data->nb_philo - 1)
 		my_usleep(philo->data->tte / 2, philo);
 	while (check_end(philo) == 0)
 	{
 		eat_sleep(philo);
-		print_state(philo, THINKING);
+		thinking(philo);
 	}
 	return (param);
 }
