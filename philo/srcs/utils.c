@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 14:56:44 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 16:46:54 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ size_t	ft_strlen(const char *str)
 
 //Usleep qui se stop si condition de fin
 void	my_usleep(long time, t_philo *philo)
-{ 
+{
 	long	t;
 	long	goal;
 	

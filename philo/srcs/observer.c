@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/11 18:12:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 17:41:48 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,28 @@ int	check_meals(t_philo *philo)
 	return (1);
 }
 
+int	will_die(t_philo *philo)
+{
+	time_t	ttd;
+	time_t	tte;
+	time_t	tts;
+
+	ttd = philo->data->ttd;
+	tte = philo->data->tte;
+	tts = philo->data->tts;
+	if (philo->data->nb_philo % 2 == 0)
+	{
+		if (ttd < tte + tts)
+			return (1);
+	}
+	else
+	{
+		if (ttd < tte + tts + tte)
+			return (1);
+	}
+	return (0);
+}
+
 //Routine du thread verifiant les conditions de fin
 void	*observer(void *param)
 {
@@ -86,7 +108,12 @@ void	*observer(void *param)
 			}
 			i++;
 		}
-		// my_usleep(10, philo);
+		if (will_die(philo) == 1)
+			my_usleep(5, philo);
+		else if (philo->data->tts < philo->data->tte)
+			my_usleep(philo->data->tts, philo);
+		else
+			my_usleep(philo->data->tte, philo);
 	}
 	return (NULL);
 }
