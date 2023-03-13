@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 16:51:02 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:46:34 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,10 @@ void	*routine(void *param)
 	philo = param;
 	if (philo->data->nb_philo == 1)
 		return (print_state(philo, HAS_TAKEN_A_FORK), param);
-	if (philo->id % 2 == 0 || philo->id == 0)
+	if (philo->id % 2 != 0)
 		my_usleep(philo->data->tte / 3, philo);
+	if (philo->id == philo->data->nb_philo - 1)
+		my_usleep(philo->data->tte / 2, philo);
 	while (check_end(philo) == 0)
 	{
 		eat_sleep(philo);
