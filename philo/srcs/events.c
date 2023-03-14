@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:17:08 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:33:10 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ void	eating(t_philo *philo, t_fork fork1, t_fork fork2)
 		take_fork(fork2, philo);
 	}
 	print_state(philo, EATING);
-	pthread_mutex_lock(&philo->data->last_meal_access);
+	pthread_mutex_lock(&philo->data->last_meals_access[philo->id]);
 	philo->last_meal = get_current_time();
-	pthread_mutex_unlock(&philo->data->last_meal_access);
+	pthread_mutex_unlock(&philo->data->last_meals_access[philo->id]);
 	my_usleep(philo->data->tte, philo);
 	philo->meals++;
 }

@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:17:21 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:50:32 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 void	wait_hungry(t_philo *philo)
 {
 	while ((get_current_time() - philo->last_meal)
-		< ((3 * philo->data->ttd) / 4))
+		< ((3 * philo->data->ttd) / 4)
+		&& check_end(philo) == 0)
 		my_usleep(50, philo);
 }
 
@@ -95,5 +96,6 @@ int	main(int argc, char **argv)
 		return (4);
 	free(philo);
 	free(data.fork);
+	free(data.last_meals_access);
 	return (0);
 }

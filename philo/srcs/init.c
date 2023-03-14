@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 21:30:27 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:36:11 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,32 @@ int	check_limits(t_data *data)
 }
 
 //Init les mutex de data
-void	init_mutex(t_data *data)
+int	init_mutex(t_data *data)
 {
+	int	i;
+
+	i = 0;
 	pthread_mutex_init(&(data->micro), NULL);
-	pthread_mutex_init(&(data->last_meal_access), NULL);
 	pthread_mutex_init(&(data->observer.end_access), NULL);
+	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!data->fork)
+		return (1);
+	data->last_meals_access = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!data->last_meals_access)
+		return (1);
+	i = 0;
+	while (i < data->nb_philo)
+	{
+		pthread_mutex_init(&(data->fork[i]), NULL);
+		pthread_mutex_init(&(data->last_meals_access[i]), NULL);
+		i++;
+	}
+	return (0);
 }
 
 //Set les valeurs de la structure data
 int	init_data(int argc, char **argv, t_data *data)
 {
-	int	i;
-
 	data->nb_philo = ft_atoi(argv[1]);
 	data->ttd = ft_atoi(argv[2]);
 	data->tte = ft_atoi(argv[3]);
@@ -49,16 +63,8 @@ int	init_data(int argc, char **argv, t_data *data)
 		data->max_meals = -1;
 	if (check_limits(data) == 1)
 		return (1);
-	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!data->fork)
+	if (init_mutex(data))
 		return (print_error("Malloc error\n"));
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		pthread_mutex_init(&(data->fork[i]), NULL);
-		i++;
-	}
-	init_mutex(data);
 	data->observer.end = 0;
 	data->start_time = get_current_time();
 	return (0);

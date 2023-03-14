@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:16:34 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:39:26 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int	is_dead(t_philo *philo)
 {
 	time_t	time;
 
-	pthread_mutex_lock(&philo->data->last_meal_access);
+	pthread_mutex_lock(&philo->data->last_meals_access[philo->id]);
 	time = get_current_time();
 	if (time - philo->last_meal > philo->data->ttd)
 	{
-		pthread_mutex_unlock(&philo->data->last_meal_access);
+		pthread_mutex_unlock(&philo->data->last_meals_access[philo->id]);
 		return (1);
 	}
 	else
 	{
-		pthread_mutex_unlock(&philo->data->last_meal_access);
+		pthread_mutex_unlock(&philo->data->last_meals_access[philo->id]);
 		return (0);
 	}
 }
@@ -78,7 +78,7 @@ void	*observer(void *param)
 			}
 			else if (philo->data->max_meals != -1 && check_meals(philo) == 1)
 				set_end(&philo->data->observer);
-			if (check_end(philo))
+			if (check_end(philo) == 0)
 				usleep(50);
 			i++;
 		}	
