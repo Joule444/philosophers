@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 13:26:37 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:11:56 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	my_usleep(long time, t_philo *philo)
 	{
 		if (check_end(philo) == 1)
 			return ;
-		usleep(50);
+		usleep(100);
 	}
 }
 

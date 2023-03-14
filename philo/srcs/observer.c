@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:39:26 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:14:41 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	*observer(void *param)
 			else if (philo->data->max_meals != -1 && check_meals(philo) == 1)
 				set_end(&philo->data->observer);
 			if (check_end(philo) == 0)
-				usleep(50);
+				usleep(500);
 			i++;
 		}	
 	}

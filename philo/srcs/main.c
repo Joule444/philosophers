@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 13:50:32 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:17:02 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	wait_hungry(t_philo *philo)
 	while ((get_current_time() - philo->last_meal)
 		< ((3 * philo->data->ttd) / 4)
 		&& check_end(philo) == 0)
-		my_usleep(50, philo);
+		usleep(500);
 }
 
 void	thinking(t_philo *philo)
@@ -35,8 +35,10 @@ void	*routine(void *param)
 	philo = param;
 	if (philo->data->nb_philo == 1)
 		return (print_state(philo, HAS_TAKEN_A_FORK), param);
+	// if (philo->id % 2 != 0)
+	// 	my_usleep(philo->data->tte / 3, philo);
 	if (philo->id % 2 != 0)
-		my_usleep(philo->data->tte / 3, philo);
+		usleep(500);
 	// if (philo->data->nb_philo % 2 != 0
 	// 	&& philo->id == philo->data->nb_philo - 1)
 	// 	my_usleep(philo->data->tte / 2, philo);
@@ -44,8 +46,8 @@ void	*routine(void *param)
 	{
 		eat_sleep(philo);
 		thinking(philo);
-		// if (check_end(philo) == 0)
-		// 	usleep(5);
+		if (check_end(philo) == 0)
+			usleep(500);
 	}
 	return (param);
 }

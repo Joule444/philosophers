@@ -6,13 +6,13 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:24:41 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 15:05:05 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-//Retourne le temps actuel
+//Retourne le temps actuel en ms
 time_t	get_current_time(void)
 {
 	struct timeval	current_time;
@@ -26,10 +26,7 @@ time_t	get_current_time(void)
 //Retourne le timestamp depuis le temps de depart
 time_t	get_timestamp(t_data *data)
 {
-	time_t	time;
-
-	time = get_current_time();
-	return (time - data->start_time);
+	return (get_current_time() - data->start_time);
 }
 
 //Print les actions des philos
