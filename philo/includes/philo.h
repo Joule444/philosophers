@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 14:00:09 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 21:44:21 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 09:55:30 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ size_t	ft_strlen(const char *str);
 int		print_error(char *str);
 int		will_die(t_philo *philo);
 void	set_end(t_observer *observer);
+void	good_usleep(t_philo *philo);
 
 #endif

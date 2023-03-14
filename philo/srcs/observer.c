@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/13 21:40:38 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:16:34 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,17 +59,6 @@ int	check_meals(t_philo *philo)
 	return (1);
 }
 
-//Usleep en fonction de la simu
-void	good_usleep(t_philo *philo)
-{
-	if (will_die(philo) == 1)
-		my_usleep(5, philo);
-	else if (philo->data->tts < philo->data->tte)
-		my_usleep(philo->data->tts, philo);
-	else
-		my_usleep(philo->data->tte, philo);
-}
-
 //Routine du thread verifiant les conditions de fin
 void	*observer(void *param)
 {
@@ -89,7 +78,8 @@ void	*observer(void *param)
 			}
 			else if (philo->data->max_meals != -1 && check_meals(philo) == 1)
 				set_end(&philo->data->observer);
-			good_usleep(philo);
+			if (check_end(philo))
+				usleep(50);
 			i++;
 		}	
 	}

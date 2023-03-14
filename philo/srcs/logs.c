@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/03 17:53:10 by jules             #+#    #+#             */
-/*   Updated: 2023/03/10 15:09:19 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/14 11:00:35 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void	print_state(t_philo *philo, int state)
 	else if (state == HAS_TAKEN_A_FORK)
 		printf("%ld\t\033[33;01m%d has taken a fork\033[00m\n", ts, philo->id + 1);
 	else if (state == DIED)
-		printf("%ld\t\033[30;01m%d died\033[00m\n", ts, philo->id + 1);
+		printf("%ld\t\033[35;01m%d died\033[00m\n", ts, philo->id + 1);
 	pthread_mutex_unlock(&philo->data->micro);
 }
