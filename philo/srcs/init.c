@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 17:04:16 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:36:11 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:45:12 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ int	init_mutex(t_data *data)
 	data->fork = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
 	if (!data->fork)
 		return (1);
-	data->last_meals_access = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
-	if (!data->last_meals_access)
+	data->meals_access = malloc(sizeof(pthread_mutex_t) * data->nb_philo);
+	if (!data->meals_access)
 		return (1);
 	i = 0;
 	while (i < data->nb_philo)
 	{
 		pthread_mutex_init(&(data->fork[i]), NULL);
-		pthread_mutex_init(&(data->last_meals_access[i]), NULL);
+		pthread_mutex_init(&(data->meals_access[i]), NULL);
 		i++;
 	}
 	return (0);

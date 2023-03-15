@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 14:24:06 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 15:14:41 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:49:38 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int	is_dead(t_philo *philo)
 {
 	time_t	time;
 
-	pthread_mutex_lock(&philo->data->last_meals_access[philo->id]);
+	pthread_mutex_lock(&philo->data->meals_access[philo->id]);
 	time = get_current_time();
 	if (time - philo->last_meal > philo->data->ttd)
 	{
-		pthread_mutex_unlock(&philo->data->last_meals_access[philo->id]);
+		pthread_mutex_unlock(&philo->data->meals_access[philo->id]);
 		return (1);
 	}
 	else
 	{
-		pthread_mutex_unlock(&philo->data->last_meals_access[philo->id]);
+		pthread_mutex_unlock(&philo->data->meals_access[philo->id]);
 		return (0);
 	}
 }
@@ -52,8 +52,13 @@ int	check_meals(t_philo *philo)
 	i = 0;
 	while (i < philo->data->nb_philo)
 	{
+		pthread_mutex_lock(&philo->data->meals_access[philo->id]);
 		if (philo[i].meals < philo->data->max_meals)
+		{
+			pthread_mutex_unlock(&philo->data->meals_access[philo->id]);
 			return (0);
+		}
+		pthread_mutex_unlock(&philo->data->meals_access[philo->id]);
 		i++;
 	}
 	return (1);
