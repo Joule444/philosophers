@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 11:59:38 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 15:11:56 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/15 21:13:22 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int	ft_isdigit(int c)
 }
 
 //Converti un num str en int
-long	ft_atoi(const char *str)
+long long	ft_atoi(const char *str)
 {
-	long	i;
-	long	res;
-	long	sign;
+	long long	res;
+	int			i;
+	int			sign;
 
 	i = 0;
 	res = 0;
@@ -41,6 +41,9 @@ long	ft_atoi(const char *str)
 		i++;
 	while (ft_isdigit(str[i]))
 	{
+		if ((res > 2147483647 && sign == 1)
+			|| (res < -2147483648 && sign == -1))
+			return (0);
 		res = (res * 10) + (str[i] - 48);
 		i++;
 	}

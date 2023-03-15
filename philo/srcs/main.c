@@ -6,28 +6,11 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 16:36:41 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:47:49 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-//Fais attendre un philo jusqua ce qu'il ait suffisament faim
-void	wait_hungry(t_philo *philo)
-{
-	while ((get_current_time() - philo->last_meal)
-		< ((3 * philo->data->ttd) / 4)
-		&& check_end(philo) == 0)
-		usleep(500);
-}
-
-//Thinking event
-void	thinking(t_philo *philo)
-{
-	print_state(philo, THINKING);
-	if (philo->data->nb_philo % 2 != 0)
-		wait_hungry(philo);
-}
 
 //Routine des philos
 void	*routine(void *param)

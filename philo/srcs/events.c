@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/31 16:08:41 by jules             #+#    #+#             */
-/*   Updated: 2023/03/14 11:33:10 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:48:15 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ void	sleeping(t_philo *philo, t_fork fork1, t_fork fork2)
 	pthread_mutex_unlock(fork1.a);
 	print_state(philo, SLEEPING);
 	my_usleep(philo->data->tts, philo);
+}
+
+//Thinking event
+void	thinking(t_philo *philo)
+{
+	print_state(philo, THINKING);
+	if (philo->data->nb_philo % 2 != 0)
+		wait_hungry(philo);
 }
 
 //Attribu ses fourchettes a philo
