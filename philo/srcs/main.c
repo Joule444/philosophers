@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/16 15:42:32 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:07:19 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ void	*routine(void *param)
 	return (param);
 }
 
+//Join tous les threads deja crees si un echoue
+void	thread_join_error(t_philo *philo, int failed)
+{
+	int i;
+	
+	i = 0;
+	while (i < failed)
+	{
+		pthread_join(philo[i].thread, NULL);
+		i++;
+	}
+	pthread_join(philo->data->observer.thread, NULL);
+}
+
 //Creation de tous les threads du programme (philos + observer)
 int	philosophers(t_philo *philo)
 {
@@ -42,22 +56,23 @@ int	philosophers(t_philo *philo)
 	ret = pthread_create(&philo->data->observer.thread, NULL, &observer, philo);
 	if (ret != 0)
 		return (print_error("Thread create error\n"));
-	while (i < philo[0].data->nb_philo)
+	while (i < philo->data->nb_philo)
 	{
 		ret = pthread_create(&(philo[i].thread), NULL, &routine, &philo[i]);
 		if (ret != 0)
+		{
+			thread_join_error(philo, i);
 			return (print_error("Thread create error\n"));
+		}
 		i++;
 	}
 	i = 0;
-	while (i < philo[0].data->nb_philo)
+	while (i < philo->data->nb_philo)
 	{
-		if (pthread_join(philo[i].thread, NULL) != 0)
-			return (print_error("Thread join error\n"));
+		pthread_join(philo[i].thread, NULL);
 		i++;
 	}
-	if (pthread_join(philo->data->observer.thread, NULL))
-		return (print_error("Thread join error\n"));
+	pthread_join(philo->data->observer.thread, NULL);
 	return (0);
 }
 
