@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/15 21:45:12 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/16 15:42:32 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,6 @@ int	main(int argc, char **argv)
 		return (4);
 	free(philo);
 	free(data.fork);
-	free(data.meals_access);
+	free(data.meals_access); 
 	return (0);
 }
