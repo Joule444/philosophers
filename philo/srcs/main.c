@@ -6,7 +6,7 @@
 /*   By: jthuysba <jthuysba@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 13:56:52 by jules             #+#    #+#             */
-/*   Updated: 2023/03/16 16:07:19 by jthuysba         ###   ########.fr       */
+/*   Updated: 2023/03/16 16:08:56 by jthuysba         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	*routine(void *param)
 //Join tous les threads deja crees si un echoue
 void	thread_join_error(t_philo *philo, int failed)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	while (i < failed)
 	{
@@ -93,6 +93,6 @@ int	main(int argc, char **argv)
 		return (4);
 	free(philo);
 	free(data.fork);
-	free(data.meals_access); 
+	free(data.meals_access);
 	return (0);
 }
